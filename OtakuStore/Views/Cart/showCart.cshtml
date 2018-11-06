@@ -1,0 +1,164 @@
+﻿@model OtakuStore.ViewModels.ShowCartViewModel
+<div>
+    <section>
+        <div class="container">
+            <!-- ========================================= CONTENT ========================================= -->
+            @if (Model.list.Any())
+            {
+                <div class="col-xs-12 col-md-9 items-holder no-margin">
+                    @foreach (var item in Model.list)
+                    {
+
+                        <div class="row no-margin cart-item">
+                            <div class="col-xs-12 col-sm-2 no-margin">
+                                <a href="#" class="thumb-holder">
+                                    <img class="lazy" alt="" src="@Model.image.Where(i => i.ProductID == item.ProductID).First().Link" style="width:80px; height:80px;" />
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-5 ">
+                                <div class="title">
+                                    <a href="#">@item.Name</a>
+                                </div>
+                                @*<div class="brand"></div>*@
+                            </div>
+                            <div class="col-xs-12 col-sm-3 no-margin">
+                                <div class="quantity">
+                                    <div class="le-quantity">
+                                        <form>
+                                            @*<a class="minus" href="#reduce"></a>*@
+                                            @if (item.Quantity > 1)
+                                            {
+                                                @Ajax.ActionLink(" ",//title
+                                                   "minus",//action,
+                                                   "Cart",//controller
+                                                   new { id = item.ProductID }
+                                                   , new AjaxOptions()
+                                                   {
+                                                       HttpMethod = "GET",
+                                                       AllowCache = false,
+                                                       OnSuccess = "OnComplete",
+                                                       OnComplete = "OnSuccess"
+                                                   }, new { @class = "minus" }
+                                                   )
+                                            }
+                                            @if (item.Quantity <= 1)
+                                            {
+                                                <div class="minus"></div>
+                                            }
+                                            @*@Ajax.ActionLink(" ",//title
+                                                   "minus",//action,
+                                                   "Cart",//controller
+                                                   new { id = item.ProductID }
+                                                   , new AjaxOptions()
+                                                   {
+                                                       HttpMethod = "GET",
+                                                       AllowCache = false,
+                                                       OnSuccess = "OnComplete",
+                                                       OnComplete = "OnSuccess"
+                                                   }, new { @class = "minus" }
+                                                   )*@
+                                            <input name="quantity" readonly="readonly" type="text" value="@item.Quantity" />
+                                            @*<a class="plus" href="#add"></a>*@
+                                            @Ajax.ActionLink(" ",//title
+                                                   "plus",//action,
+                                                   "Cart",//controller
+                                                   new { id = item.ProductID }
+                                                   , new AjaxOptions()
+                                                   {
+                                                       HttpMethod = "GET",
+                                                       AllowCache = false,
+                                                       OnSuccess = "OnComplete",
+                                                       OnComplete = "OnSuccess"
+                                                   }, new { @class = "plus" }
+                                                   )
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-2 no-margin">
+                                <div class="price">
+                                    @item.Price
+                                </div>
+                                @*<a class="close-btn" href="#"></a>*@
+                                @Ajax.ActionLink(" ",//title
+                                "Delete",//action,
+                                "Cart",//controller
+                                new { id = item.ProductID }
+                                , new AjaxOptions()
+                                {
+                                    HttpMethod = "GET",
+                                    AllowCache = false,
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "cart-page",
+                                    OnSuccess = "OnComplete"
+                                }, new { @class = "close-btn" }
+                                )
+                            </div>
+                        </div><!-- /.cart-item -->
+                    }
+                </div>
+
+
+
+            <!-- ========================================= CONTENT : END ========================================= -->
+            <!-- ========================================= SIDEBAR ========================================= -->
+                <div class="col-xs-12 col-md-3 no-margin sidebar ">
+                    <div class="widget cart-summary">
+                        <h1 class="border">shopping cart</h1>
+                        <div class="body">
+                            <ul class="tabled-data no-border inverse-bold">
+                                <li>
+                                    <label>cart subtotal</label>
+                                    <div class="value pull-right">
+                                        @{ double? total = 0;}
+                                        @foreach (var item in Model.list)
+                                        {
+                                            total = total + (item.Price * item.Quantity);
+                                        }$@total
+                                    </div>
+                                </li>
+                                <li>
+                                    <label>shipping</label>
+                                    <div class="value pull-right">free shipping</div>
+                                </li>
+                            </ul>
+                            <ul id="total-price" class="tabled-data inverse-bold no-border">
+                                <li>
+                                    <label>order total</label>
+                                    <div class="value pull-right">$@total</div>
+                                </li>
+                            </ul>
+                            <div class="buttons-holder">
+                                <a class="le-button big" href="/Cart/checkOut">checkout</a>
+                                <a class="simple-link block" href="/Home/Index">continue shopping</a>
+                            </div>
+                        </div>
+                    </div><!-- /.widget -->
+                    @*<div id="cupon-widget" class="widget">
+                            <h1 class="border">use coupon</h1>
+                            <div class="body">
+                                <form>
+                                    <div class="inline-input">
+                                        <input data-placeholder="enter coupon code" type="text" />
+                                        <button class="le-button" type="submit">Apply</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>*@<!-- /.widget -->
+                </div><!-- /.sidebar -->
+            <!-- ========================================= SIDEBAR : END ========================================= -->
+                                            }
+            @if (!Model.list.Any())
+            {
+                <div class="col-xs-12 col-md-12 items-holder no-margin">
+                    <div style="text-align:center">
+                        <img src="~/Content/Images/cart-empty.png" alt=""/><br />
+                        Không có sản phẩm nào trong giỏ hàng của bạn.<br /><br />
+                        <a class="le-button" href="/Home/Index">Continue shopping</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </section>
+</div>

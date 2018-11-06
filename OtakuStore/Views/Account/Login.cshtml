@@ -1,0 +1,124 @@
+﻿@using OtakuStore.Models
+@model LoginViewModel
+
+<h2>@ViewBag.Title</h2>
+
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="animate-dropdown">
+    <!-- ========================================= BREADCRUMB ========================================= -->
+    <div id="top-mega-nav">
+        <div class="container">
+            <nav>
+                <ul class="inline">
+                    <li class="dropdown le-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-list"></i> Otaku Store
+                        </a>
+                    </li>
+
+                    <li class="breadcrumb-nav-holder">
+                        <ul>
+                            <li class="breadcrumb-item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item current gray">
+                                <a href="about.html">Authentication</a>
+                            </li>
+                        </ul>
+                    </li><!-- /.breadcrumb-nav-holder -->
+                </ul>
+            </nav>
+        </div><!-- /.container -->
+    </div><!-- /#top-mega-nav -->
+    <!-- ========================================= BREADCRUMB : END ========================================= -->
+</div>
+
+<!-- ========================================= MAIN ========================================= -->
+<main id="authentication" class="inner-bottom-md">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal login-form cf-style-1", role = "form" }))
+    {
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 col-sm-12">
+                    <section class="section sign-in inner-right-xs">
+                        <h2 class="bordered">Sign In</h2>
+                        <p>Hello, Welcome to your account</p>
+
+                        <div class="social-auth-buttons">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn-block btn-lg btn btn-facebook" type="button"><i class="fa fa-facebook"></i> Sign In with Facebook</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn-block btn-lg btn btn-twitter" type="button"><i class="fa fa-twitter"></i> Sign In with Twitter</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group field-row col-md-12">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group field-row col-md-12">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="field-row clearfix">
+                            <span class="pull-left">
+                                <label class="content-color"><input type="checkbox" class="le-checbox auto-width inline"> <span class="bold">Remember me</span></label>
+                            </span>
+                            <span class="pull-right">
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            </span>
+                        </div>
+                        <div class="buttons-holder">
+                            <button type="submit" class="le-button huge">Sign In</button>
+                        </div><!-- /.buttons-holder -->
+
+
+
+                    </section><!-- /.sign-in -->
+                </div><!-- /.col -->
+                <<div class="col-md-6 col-sm-12" style="max-height: 500px;">
+                    <div class="ask-register hidden-sm hidden-xs">
+                        <img src="~/Content/Images/BG/AskRegister.png" />
+                    </div>
+                    <div class="buttons-holder table-register hidden-sm hidden-xs">
+                        <a href="/Account/Register"><button type="button"></button></a>
+                    </div>
+                    <div class="hidden-lg hidden-md col-sm-12">
+                        <h2 class="semi-bold">Don't have an account?</h2>
+                        <div class="buttons-holder">
+                        </div><!-- /.buttons-holder -->
+
+                        <h2 class="semi-bold">Sign up today and you'll be able to :</h2>
+
+                        <ul class="list-unstyled list-benefits">
+                            <li><i class="fa fa-check primary-color"></i> Speed your way through the checkout</li>
+                            <li><i class="fa fa-check primary-color"></i> Track your orders easily</li>
+                            <li><i class="fa fa-check primary-color"></i> Keep a record of all your purchases</li>
+                        </ul>
+                    </div><!-- /.buttons-holder -->
+
+                </div><!-- /.col -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    }
+</main><!-- /.authentication -->
+<!-- ========================================= MAIN : END ========================================= -->

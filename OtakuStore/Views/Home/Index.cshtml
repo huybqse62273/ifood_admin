@@ -1,0 +1,672 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model OtakuStore.ViewModels.HomeViewModel
+
+<div id="top-banner-and-menu">
+    <div class="container">
+        <div class="col-xs-12 col-sm-4 col-md-3 sidemenu-holder">
+            <!-- ================================== TOP NAVIGATION ================================== -->
+            <div class="side-menu animate-dropdown">
+                <div class="head"><i class="fa fa-list"></i> Danh mục sản phẩm</div>
+                <nav class="yamm megamenu-horizontal" role="navigation">
+                    <ul class="nav">
+                        @foreach (var item in Model.categories)
+                        {
+                            <li class="dropdown menu-item">
+                                @*<a href="/Home/Search/keyword=@item.title" class="dropdown-toggle" data-toggle="dropdown">@item.title</a>*@
+                                
+                                @if (item.title.ToString().Equals("Manga & Anime"))
+                                {
+                                    @Html.ActionLink(item.title, "Search", "Home", new { keyword = item.title }, new { @class = "dropdown-toggle", @data_toggle = "dropdown" })
+                                    <ul class="dropdown-menu mega-menu">
+                                        <li class="yamm-content">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <ul class="list-unstyled">
+                                                        @foreach (var obj in Model.animes)
+                                                        {
+                                                            <li>@Html.ActionLink(obj.title, "Search", "Home", new { keyword = obj.title }, new { })</li>
+                                                            @*<li><a href="/Home/Search/keyword=@obj.title">@obj.title</a></li>*@
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(item.title, "Search", "Home", new { keyword = item.title })
+                                }
+                            </li><!-- /.menu-item -->
+                        }
+
+                    </ul><!-- /.nav -->
+                </nav><!-- /.megamenu-horizontal -->
+            </div><!-- /.side-menu -->
+            <!-- ================================== TOP NAVIGATION : END ================================== -->
+        </div><!-- /.sidemenu-holder -->
+
+        <div class="col-xs-12 col-sm-8 col-md-9 homebanner-holder">
+            <!-- ========================================== SECTION – HERO ========================================= -->
+            <div id="hero">
+                <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+
+                    <div class="item" style="background-image: url(../../Content/Images/BG/Naruto.png);">
+                    </div><!-- /.item -->
+
+                    <div class="item" style="background-image: url(../../Content/Images/BG/kyoto.jpg);">
+                    </div><!-- /.item -->
+
+                </div><!-- /.owl-carousel -->
+            </div>
+            <!-- ========================================= SECTION – HERO : END ========================================= -->
+        </div><!-- /.homebanner-holder -->
+    </div><!-- /.container -->
+</div><!-- /#top-banner-and-menu -->
+<!-- ========================================= HOME BANNERS ========================================= -->
+<section id="banner-holder" class="wow fadeInUp">
+    <div class="container">
+        <div class="col-xs-12 col-lg-6 no-margin banner">
+            <a href="category-grid-2.html">
+                <img class="banner-image" alt="" src="~/Content/Images/Slider/sli_2.jpg" />
+            </a>
+        </div>
+        <div class="col-xs-12 col-lg-6 no-margin text-right banner">
+            <a href="category-grid-2.html">
+                <img class="banner-image" alt="" src="~/Content/Images/Slider/sli_3.jpg" />
+            </a>
+        </div>
+    </div><!-- /.container -->
+</section><!-- /#banner-holder -->
+<!-- ========================================= HOME BANNERS : END ========================================= -->
+
+<div id="products-tab" class="wow fadeInUp">
+    <div class="container">
+        <div class="tab-holder">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#featured" data-toggle="tab">featured</a></li>
+                <li><a href="#new-arrivals" data-toggle="tab">new arrivals</a></li>
+                <li><a href="#top-sales" data-toggle="tab">top sales</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="featured">
+                    <div class="product-grid-holder">
+                        @foreach (var item in Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.C_View).Take(4))
+                        {
+                            <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
+                                <div class="product-item">
+                                    @if (item.SaleRate > 0)
+                                    {
+                                        <div class="ribbon red"><span>sale</span></div>
+                                    }
+                                    @if (DateTime.Now.Subtract(DateTime.Parse(item.DateCreated.ToString())).TotalDays <= 3)
+                                    {
+                                        <div class="ribbon blue"><span>new!</span></div>
+                                    }
+                                    @if (item.OrderCounter > 100)
+                                    {
+                                        <div class="ribbon green"><span>Best Seller</span></div>
+                                    }
+                                    <div class="image">
+                                        <img alt="Anh-Figure" src="@Model.images.Where(d => d.ProductID == item.Id).FirstOrDefault().Link" />
+                                    </div>
+                                    <div class="body">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="label-discount green">@item.SaleRate% sale</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="label-discount">&nbsp;</div>
+                                        }
+                                        <div class="title limit-text">
+                                            <a href="/Product/ProductDetail/@item.Id">@item.Name</a>
+                                        </div>
+                                        <div class="brand">@Model.manufactors.Where(d => d.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                    </div>
+                                    <div class="prices">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="price-prev">
+                                                @item.Price.Value.ToString("#,###0")
+                                            </div>
+                                        }
+
+                                        <div class="price-current pull-right">
+                                            @((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="hover-area">
+                                        <div class="add-cart-button">
+                                            @if (item.StatusID == 1 || item.StatusID == 5)
+                                            {
+                                                        @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                            }
+                                            else
+                                            {
+                                                <a class="le-button disabled product_type_simple">add to cart</a>
+                                            }
+                                        </div>
+                                        <div class="wish-compare @item.Id">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                                {   
+                                                    @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                }
+                                                else
+                                                {
+                                                    @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                            }
+                                            @*<a class="btn-add-to-compare" href="#">compare</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }                     
+                    </div>
+                    <div class="loadmore-holder text-center">
+                        <a class="btn-loadmore" href="/Home/Search?keyword=featured">
+                            <i class="fa fa-plus"></i>
+                            load more products
+                        </a>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="new-arrivals">
+                    <div class="product-grid-holder">
+                        @foreach (var item in Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.DateCreated).Take(4))
+                        {
+                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
+                                <div class="product-item">
+                                    @if (item.SaleRate > 0)
+                                    {
+                                        <div class="ribbon red"><span>sale</span></div>
+                                    }
+                                    @if (DateTime.Now.Subtract(DateTime.Parse(item.DateCreated.ToString())).TotalDays <= 3)
+                                    {
+                                        <div class="ribbon blue"><span>new!</span></div>
+                                    }
+                                    @if (item.OrderCounter > 100)
+                                    {
+                                        <div class="ribbon green"><span>Best Seller</span></div>
+                                    }
+                                    <div class="image">
+                                        <img alt="" src="@Model.images.Where(d => d.ProductID == item.Id).FirstOrDefault().Link" />
+                                    </div>
+                                    <div class="body">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="label-discount green">@item.SaleRate% sale</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="label-discount">&nbsp;</div>
+                                        }
+                                        <div class="label-discount clear"></div>
+                                        <div class="title limit-text">
+                                            <a href="/Product/ProductDetail/@item.Id">@item.Name</a>
+                                        </div>
+                                        <div class="brand">@Model.manufactors.Where(d => d.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                    </div>
+                                    <div class="prices">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="price-prev">
+                                                @item.Price.Value.ToString("#,###0")
+                                            </div>
+                                        }
+
+                                        <div class="price-current pull-right">
+                                            @((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))
+                                        </div>
+                                    </div>
+                                    <div class="hover-area">
+                                        <div class="add-cart-button">
+                                            @*<a href="/Cart/addToCart/@item.Id" class="le-button">add to cart</a>*@
+                                            @if (item.StatusID == 1 || item.StatusID == 5)
+                                            {
+                                                @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                            }
+                                            else
+                                            {
+                                                <a class="le-button disabled product_type_simple">add to cart</a>
+                                            }
+                                        </div>
+                                        <div class="wish-compare @item.Id">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                                {
+                                                    @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                }
+                                                else
+                                                {
+                                                    @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                            }
+                                            @*<a class="btn-add-to-compare" href="#">compare</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="loadmore-holder text-center">
+                        <a class="btn-loadmore" href="/Home/Search?keyword=new-arrivals">
+                            <i class="fa fa-plus"></i>
+                            load more products
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane" id="top-sales">
+                    <div class="product-grid-holder">
+                        @foreach (var item in Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.SaleRate).Take(4))
+                        {
+                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
+                                <div class="product-item">
+                                    @if (item.SaleRate > 0)
+                                    {
+                                        <div class="ribbon red"><span>sale</span></div>
+                                    }
+                                    @if (item.OrderCounter > 100)
+                                    {
+                                        <div class="ribbon green"><span>Best Seller</span></div>
+                                    }
+                                    <div class="ribbon green"><span>bestseller</span></div>
+                                    @if (Model.images.Where(d => d.ProductID == item.Id).Any())
+                                    {
+                                        <div class="image">
+                                            <img alt="" src="@Model.images.Where(d => d.ProductID == item.Id).First().Link" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="image">
+                                            <img alt="Anh-Figure" src="" />
+                                        </div>
+                                    }
+
+                                    <div class="body">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="label-discount green">@item.SaleRate% sale</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="label-discount">&nbsp;</div>
+                                        }
+                                        <div class="label-discount clear"></div>
+                                        <div class="title limit-text">
+                                            <a href="/Product/ProductDetail/@item.Id">@item.Name</a>
+                                        </div>
+                                        <div class="brand">@Model.manufactors.Where(d => d.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                    </div>
+                                    <div class="prices">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="price-prev">
+                                                @item.Price.Value.ToString("#,###0")
+                                            </div>
+                                        }
+
+                                        <div class="price-current pull-right">
+                                            @((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))
+                                        </div>
+                                    </div>
+                                    <div class="hover-area">
+                                        <div class="add-cart-button">
+                                            @*<a href="/Cart/addToCart/@item.Id" class="le-button">add to cart</a>*@
+                                            @if (item.StatusID == 1 || item.StatusID == 5)
+                                            {
+                                                @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                            }
+                                            else
+                                            {
+                                                <a class="le-button disabled product_type_simple">add to cart</a>
+                                            }
+                                        </div>
+                                        <div class="wish-compare @item.Id">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                                {
+                                                    @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                         new AjaxOptions()
+                                                         {
+                                                             HttpMethod = "GET",
+                                                             AllowCache = false,
+                                                             OnSuccess = "OnComplete",
+                                                         }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                        )
+                                                }
+                                                else
+                                                {
+                                                    @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                         new AjaxOptions()
+                                                         {
+                                                             HttpMethod = "GET",
+                                                             AllowCache = false,
+                                                             OnSuccess = "OnComplete",
+                                                         }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                        )
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div>
+                    <div class="loadmore-holder text-center">
+                        <a class="btn-loadmore" href="/Home/Search?keyword=top-sales">
+                            <i class="fa fa-plus"></i>
+                            load more products
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================= BEST SELLERS ========================================= -->
+<section id="bestsellers" class="color-bg wow fadeInUp">
+    <div class="container">
+        <h1 class="section-title">Best Sellers</h1>
+
+        <div class="product-grid-holder medium">
+            <div class="col-xs-12 col-md-7 no-margin">
+
+                <div class="row no-margin">
+                    @foreach (var item in Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.OrderCounter).Take(6))
+                    {
+                        <div class="col-xs-12 col-sm-4 col-md-4 no-margin product-item-holder size-medium hover">
+                            <div class="product-item">
+                                @if (item.SaleRate > 0)
+                                {
+                                    <div class="ribbon red"><span>sale</span></div>
+                                }
+                                @if (DateTime.Now.Subtract(DateTime.Parse(item.DateCreated.ToString())).TotalDays <= 3)
+                                {
+                                    <div class="ribbon blue"><span>new!</span></div>
+                                }
+                                @if (item.OrderCounter > 100)
+                                {
+                                    <div class="ribbon green"><span>Best Seller</span></div>
+                                }
+                                <div class="image">
+                                    <img alt="" src="@Model.images.Where(d => d.ProductID == item.Id).First().Link" />
+                                </div>
+                                <div class="body">
+                                    @if (item.SaleRate > 0)
+                                    {
+                                        <div class="label-discount green">@item.SaleRate% sale</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="label-discount">&nbsp;</div>
+                                    }
+                                    <div class="label-discount clear"></div>
+                                    <div class="title limit-text">
+                                        <a href="/Product/ProductDetail/@item.Id">@item.Name</a>
+                                    </div>
+                                    <div class="brand">@Model.manufactors.Where(d => d.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                </div>
+                                <div class="prices">
+                                    @if (item.SaleRate > 0)
+                                    {
+                                        <div class="price-prev">
+                                            @item.Price.Value.ToString("#,###0")
+                                        </div>
+                                    }
+
+                                    <div class="price-current pull-right">
+                                        @((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))
+                                    </div>
+                                </div>
+                                <div class="hover-area">
+                                    <div class="add-cart-button">
+                                        @*<a href="/Cart/addToCart/@item.Id" class="le-button">Add to cart</a>*@
+                                        @if (item.StatusID == 1 || item.StatusID == 5)
+                                        {
+                                            @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                        }
+                                        else
+                                        {
+                                            <a class="le-button disabled product_type_simple">add to cart</a>
+                                        }
+                                    </div>
+                                    <div class="wish-compare @item.Id">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                            {
+                                                @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                            }
+                                            else
+                                            {
+                                                @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                            }
+                                        }
+                                        else
+                                        {
+                                                @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                        }
+                                        @*<a class="btn-add-to-compare" href="#">compare</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.product-item-holder -->
+
+                    }
+
+                </div><!-- /.row -->
+            </div><!-- /.col -->
+            @{
+                var productItem = Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.OrderCounter).FirstOrDefault();
+                var listThumb = Model.images.Where(d => d.ProductID == productItem.Id).ToList().Take(4);
+                int count = 0;
+            }
+
+            <div class="col-xs-12 col-md-5 no-margin">
+                <div class="product-item-holder size-big single-product-gallery small-gallery">
+                    <div id="owl-single-product" class="single-product-slider owl-carousel">
+                        @foreach (var image in listThumb)
+                        {
+                            <div class="single-product-gallery-item" id="slide@(count)">
+                                <a data-rel="prettyphoto" href="@image.Link">
+                                    <img alt="" src="@image.Link" />
+                                </a>
+                            </div><!-- /.single-product-gallery-item -->
+                            count++;
+                        }
+                    </div><!-- /.single-product-slider -->
+                    <div class="gallery-thumbs clearfix">
+                        <ul>
+                            @{ count = 0;}
+                            @foreach (var image in listThumb)
+                            {
+                                <li><a class="horizontal-thumb @if (count == 0) { Html.Raw("active"); } " data-target="#owl-single-product" data-slide="@(count)" href="#slide@(count)"><img alt="" src="@image.Link" /></a></li>
+                                count++;
+                            }
+
+                        </ul>
+                    </div><!-- /.gallery-thumbs -->
+
+                    <div class="body">
+                        @if (productItem.SaleRate > 0)
+                        {
+                            <div class="label-discount green">@productItem.SaleRate% sale</div>
+                        }
+                        else
+                        {
+                            <div class="label-discount">&nbsp;</div>
+                        }
+                        <div class="label-discount clear"></div>
+                        <div class="title">
+                            <a href="/Product/ProductDetail/@productItem.Id">@productItem.Name</a>
+                        </div>
+                        <div class="brand">@Model.manufactors.Where(d => d.Id == productItem.ManufactorID).FirstOrDefault().Name</div>
+                    </div>
+                    <div class="prices">
+                        @if (productItem.SaleRate > 0)
+                        {
+                            <div class="price-prev">
+                                @productItem.Price.Value.ToString("#,###0")
+                            </div>
+                        }
+
+                        <div class="price-current pull-right">
+                            @((productItem.Price.Value - (productItem.Price.Value * productItem.SaleRate) / 100).ToString("#,###0"))
+                        </div>
+                        @*<a href="cart.html" class="le-button big inline">add to cart</a>*@
+                        @Ajax.ActionLink("add to cart",//title
+                                                       "addToCart",//action,
+                                                       "Cart",//controller
+                                                       new { id = productItem.Id }
+                                                       , new AjaxOptions()
+                                                       {
+                                                           HttpMethod = "GET",
+                                                           AllowCache = false,
+                                                           OnSuccess = "OnComplete"
+                                                       }, new { @class = "le-button big inline" }
+                                                       )
+                    </div>
+                </div><!-- /.product-item-holder -->
+            </div><!-- /.col -->
+
+        </div><!-- /.product-grid-holder -->
+    </div><!-- /.container -->
+</section><!-- /#bestsellers -->
+<!-- ========================================= BEST SELLERS : END ========================================= -->
+<div id='loadingDiv' class="loadingDiv">
+    <img src='~/Content/Images/BG/loading_Rikka.gif' />
+</div>
+
+<script>
+    $('#loadingDiv').ajaxStart(function () {
+        $(this).show();  // show Loading Div
+        window.setTimeout(function () {
+            $('#loadingDiv').hide();
+        }, 2000);
+    });  
+</script>
+<script>
+    $(document).ready(function () {
+        if (@Html.Raw(Json.Encode(ViewBag.ContactSuccessfull)) != null) {
+            alert("Your message was submit. We will contact you later!");
+        }
+    });
+
+
+    
+</script>

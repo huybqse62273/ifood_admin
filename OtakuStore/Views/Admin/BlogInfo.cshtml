@@ -1,0 +1,84 @@
+﻿
+ 
+@{
+    ViewBag.Title = "Blog Info";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+@model OtakuStore.ViewModels.BlogViewModel
+
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="content-main">
+
+        <!--banner-->
+        <div class="banner">
+            <h2>
+                <a href="/Home/Index">Home</a>
+                <i class="fa fa-angle-right"></i>
+                <a href="/Home/Blog"><span>Blog</span></a>
+            </h2>
+        </div>
+        <!--//banner-->
+        <!--grid-->
+        <div class="grid-form">
+            <!---->
+            <div class="grid-form1">
+                <div style="margin-left: 200px;"><h3>Edit Blog</h3></div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="horizontal-form">
+                        <form class="form-horizontal" action="/Admin/EditBlog" method="post">
+                            <input type="hidden" name="blog_id" value="@Model.blog.Id" />
+                            <!--Title-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Blog Title</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" class="form-control1" name="blog_title" value="@Model.blog.Title" id="focusedinput" required placeholder="Input blog's title">
+                                </div>
+                            </div>
+                            <!--Blog Banner Image-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Blog Image</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="blog_image" value="@Model.blog.BlogImage">
+                                    <p class="help-block">@Model.blog.BlogImage</p>
+                                </div>
+                            </div>
+                            <!--Description-->
+                            <div class="form-group">
+                                <label for="txtarea1" class="col-sm-2 control-label">Blog Description</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <textarea name="blog_description" id="blog_description" cols="100" rows="6" class="form-control1">@Model.blog.Description</textarea>
+                                    <script>CKEDITOR.replace('blog_description');</script>
+                                </div>
+                            </div>
+                            <!--Publisher-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Publisher</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" min="0" value="@Model.blog.Publisher" readonly class="form-control1" name="publisher" id="focusedinput" required placeholder="Input name publisher">
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <button class="btn-primary btn" type="submit">Submit</button>
+                                        <button class="btn-default btn">Cancel</button>
+                                        <button class="btn-inverse btn" type="reset">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//grid-->
+                <!---->
+                <div class="copy">
+                    <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+

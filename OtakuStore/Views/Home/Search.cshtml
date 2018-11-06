@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model OtakuStore.ViewModels.SearchViewModel
+@using PagedList.Mvc
+@using PagedList
+
+<section id="category-grid">
+    <div class="container">
+        <!-- ========================================= SIDEBAR ========================================= -->
+        <div class="col-xs-12 col-sm-3 no-margin sidebar narrow">
+            <!-- ========================================= PRODUCT FILTER ========================================= -->
+            <div class="widget">
+                <h1>Product Filters</h1>
+                <div class="body bordered">
+                    <form action="/Home/Search/">
+                        <div class="category-filter">
+                            <input type="hidden" name="keyword" value="@ViewBag.keyword" />
+                            <h2>Brands</h2>
+                            <hr>
+                            <ul class="radio">
+                                <li>
+                                    <input class="le-checkbox" type="radio" checked name="chkBrand" value="all" /> <label>All</label> <span class="pull-right">(@Model.productAll.Count())</span>
+                                </li>
+                                @foreach (var item in Model.manufactors)
+                                {
+                                    <li>
+                                        <input class="le-checkbox" type="radio" name="chkBrand" value="@item.Name"
+                                               @if (ViewBag.Brand == item.Id) { @Html.Raw("checked")    } /> <label>@item.Name</label> <span class="pull-right">(@Model.productAll.Where(m => m.ManufactorID == item.Id).Count())</span>
+                                        </li>
+                                }
+                            </ul>
+                        </div><!-- /.category-filter -->
+
+                        <div class="price-filter">
+                            <h2>Price</h2>
+                            <hr>
+                            <div class="price-range-holder">
+                                @{
+                                    double price = 50000;
+                                    if (ViewBag.Price != null)
+                                    {
+                                        price = ViewBag.Price;
+                                    }
+                                }
+                                <input type="text" class="price-slider" id="price-filter" value="@price" name="price" data-slider-min="50000" data-slider-max="10000000" data-slider-step="50000" data-slider-value="@price">
+
+                                <span class="min-max col-md-10">
+                                    Price: 50,000 - 10,000,000
+                                </span>
+                                <button class="btn btn-success" type="button" style="width: 100%; margin-top: 20px;" onclick="filterItem()">
+                                    Filter
+                                </button>
+                            </div>
+                        </div><!-- /.price-filter -->
+                    </form>
+                </div><!-- /.body -->
+            </div><!-- /.widget -->
+            <!-- ========================================= PRODUCT FILTER : END ========================================= -->
+            <!-- ========================================= CATEGORY TREE ========================================= -->
+            <div class="sidemenu-holder">
+                <div class="side-menu animate-dropdown" style="width:250px">
+                    <div class="head"><i class="fa fa-list"></i> Danh mục sản phẩm</div>
+                    <nav class="yamm megamenu-horizontal" role="navigation">
+                        <ul class="nav">
+                            @foreach (var item in Model.categories)
+                            {
+                                <li class="dropdown menu-item">
+                                    @*<a href="/Home/Search/keyword=@item.title" class="dropdown-toggle" data-toggle="dropdown">@item.title</a>*@
+
+                                    @if (item.title.ToString().Equals("Manga & Anime"))
+                                    {
+                                        @Html.ActionLink(item.title, "Search", "Home", new { keyword = item.title }, new { @class = "dropdown-toggle", @data_toggle = "dropdown" })
+                                        <ul class="dropdown-menu mega-menu">
+                                            <li class="yamm-content">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <ul class="list-unstyled">
+                                                            @foreach (var obj in Model.animes)
+                                                            {
+                                                                <li>@Html.ActionLink(obj.title, "Search", "Home", new { keyword = obj.title }, new { })</li>
+                                                                @*<li><a href="/Home/Search/keyword=@obj.title">@obj.title</a></li>*@
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink(item.title, "Search", "Home", new { keyword = item.title })
+                                    }
+                                </li><!-- /.menu-item -->
+                            }
+
+                        </ul><!-- /.nav -->
+                    </nav><!-- /.megamenu-horizontal -->
+                </div>
+            </div>
+            <!-- /.category-accordions -->
+            <!-- ========================================= CATEGORY TREE : END ========================================= -->
+            <!-- ========================================= FEATURED PRODUCTS ========================================= -->
+            <!-- ========================================= FEATURED PRODUCTS : END ========================================= -->
+        </div>
+        <!-- ========================================= SIDEBAR : END ========================================= -->
+        <!-- ========================================= CONTENT ========================================= -->
+
+        <div class="col-xs-12 col-sm-9 no-margin wide sidebar">
+
+            <div class="tab-content">
+                <div id="grid-view" class="products-grid fade tab-pane in active">
+
+                    <div class="product-grid-holder">
+                        <b>Found @ViewBag.Size Result</b>
+                        <div class="row no-margin">
+                            @foreach (var item in Model.list)
+                            {
+                                <div class="col-xs-12 col-sm-4 no-margin product-item-holder hover item-filter" id="item-@item.Id">
+                                    <div class="product-item">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="ribbon red"><span>Sale</span></div>
+                                        }
+                                        @if (DateTime.Now.Subtract(DateTime.Parse(item.DateCreated.ToString())).TotalDays <= 3)
+                                        {
+                                            <div class="ribbon blue"><span>New!</span></div>
+                                        }
+                                        @if (item.OrderCounter > 100)
+                                        {
+                                            <div class="ribbon green"><span>Best Seller</span></div>
+                                        }
+                                        @*<div class="ribbon green"><span>Top Seller</span></div>*@
+                                        @if (Model.images.Where(i => i.ProductID == item.Id).Any())
+                                        {
+                                            <div class="image">
+                                                <img alt="" src="@Model.images.Where(i => i.ProductID == item.Id).FirstOrDefault().Link" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image">
+                                                <img alt="Figure Image" src="" />
+                                            </div>
+                                        }
+
+                                        <div class="body">
+                                            @if (item.SaleRate > 0)
+                                            {
+                                                <div class="label-discount green">@item.SaleRate% sale</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="">&nbsp;</div>
+                                            }
+                                            <div class="title limit-text">
+                                                <a href="/Product/ProductDetail/@item.Id">@item.Name.</a>
+                                            </div>
+                                            <div class="brand item-brand">@Model.manufactors.Where(m => m.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                        </div>
+                                        <div class="prices">
+                                            @if (item.SaleRate > 0)
+                                            {
+                                                <div class="price-prev">
+                                                    @item.Price.Value.ToString("#,###0")
+                                                </div>
+                                            }
+
+                                            <div class="price-current pull-right item-price">
+                                                @((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))
+                                            </div>
+                                        </div>
+                                        <div class="hover-area">
+                                            <div class="add-cart-button">
+                                                @*<a href="single-product.html" class="le-button">add to cart</a>*@
+                                                @if (item.StatusID == 1 || item.StatusID == 5)
+                                                {
+                                                    @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                                }
+                                                else
+                                                {
+                                                    <a class="le-button disabled product_type_simple">add to cart</a>
+                                                }
+                                            </div>
+                                            <div class="wish-compare @item.Id">
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                                    {
+                                                        @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                    }
+                                                    else
+                                                    {
+                                                        @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                                }
+                                                @*<a class="btn-add-to-compare" href="#">compare</a>*@
+                                            </div>
+                                        </div>
+                                    </div><!-- /.product-item -->
+                                </div><!-- /.product-item-holder -->
+                            }
+                        </div><!-- /.row -->
+                    </div><!-- /.product-grid-holder -->
+
+                    <div class="pagination-holder">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 text-left">
+                                @Html.PagedListPager(Model.list, page => Url.Action("Search", "Home", new { page, keyword = @ViewBag.keyword, price = ViewBag.Price, chkBrand = ViewBag.Brand }))
+
+                            </div><!-- /.row -->
+                        </div><!-- /.pagination-holder -->
+                    </div><!-- /.products-grid #grid-view -->
+                </div>
+
+            </div><!-- /.tab-content -->
+        </div><!-- /.grid-list-products -->
+        <!-- ========================================= CONTENT : END ========================================= -->
+    </div><!-- /.container -->
+
+</section><!-- /#category-grid -->
+<div id='loadingDiv' class="loadingDiv">
+    <img src='~/Content/Images/BG/loading_Rikka.gif' />
+</div>
+<script>
+    $('#loadingDiv').ajaxStart(function () {
+        $(this).show();  // show Loading Div
+        window.setTimeout(function () {
+            $('#loadingDiv').hide();
+        }, 2000);
+    });
+</script>
+
+<script>
+    function filterItem() {
+        var price = document.getElementById("price-filter");
+        var brand = document.getElementsByName("chkBrand");
+        for (var i = 0; i < brand.length; i++) {
+            if (brand[i].checked == true) {
+                brand = brand[i];
+                break;
+            }
+        }
+
+        var items = document.getElementsByClassName("item-filter");
+        var itemsPrice = document.getElementsByClassName("item-price");
+        var itemsBrand = document.getElementsByClassName("item-brand");
+
+        var itemHidden = "";
+        for (var i = 0; i < items.length; i++) {
+
+            var emp = itemsPrice[i].innerText.split(",");
+            var thisItemPrice = "";
+            for (var k = 0; k < emp.length; k++) {
+                thisItemPrice = thisItemPrice + emp[k];
+            }
+
+            var itemId = items[i].getAttribute("id");
+
+            if ($('#' + itemId).hasClass("none-display-filter")) {
+                $('#' + itemId).removeClass("none-display-filter");
+                $('#' + itemId).removeClass("display-none");
+            }
+
+            if (parseInt(thisItemPrice) >= parseInt(price.value) && (itemsBrand[i].innerText.toLowerCase() == brand.value.toLowerCase() || brand.value.toLowerCase() == "all")) {
+                if ($('#' + itemId).hasClass("none-display-filter")) {
+                    $('#' + itemId).removeClass("none-display-filter");
+
+                    $('#' + itemId).removeClass("display-none");
+                }
+            } else {
+                $('#' + itemId).addClass("none-display-filter");
+
+                itemHidden = itemHidden + " " + itemId;
+            }
+        }
+        debugger;
+        if (itemHidden != "") {
+            window.setTimeout(function () {
+                itemHidden = itemHidden.trim().split(" ");
+                for (var i = 0; i < itemHidden.length; i++) {
+                    $('#' + itemHidden[i]).addClass("display-none");
+                }
+            }, 500);
+        }
+
+    }
+
+</script>

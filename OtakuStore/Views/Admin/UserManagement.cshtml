@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "UserManagement";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+
+@model OtakuStore.ViewModels.UserViewModel
+@using PagedList.Mvc
+
+
+<div id="product_area">
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="content-main">
+
+            <!--banner-->
+            <div class="banner">
+                <h2>
+                    <a href="index.html">Home</a>
+                    <i class="fa fa-angle-right"></i>
+                    <span>Forms</span>
+                </h2>
+            </div>
+            <!--//banner-->
+            <div class="container">
+                <div class="table-responsive col-md-11">
+                    <table class="table-bordered" style="background-color: white;">
+                        <thead>
+                            <tr>
+                                <th style="width: 3%;" class="center-text">No.</th>
+                                <th style="width: 25%;" class="center-text">Username</th>
+                                <th class="center-text">Email</th>
+                                <th class="center-text">Phone Number</th>
+                                <th class="center-text">Gender</th>
+                                <th class="center-text">Time Created</th>
+                                <th class="center-text">Is Deleted</th>
+                                <th class="center-text">Block Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int count = 1;}
+                            @foreach (var item in Model.accounts)
+                            {
+
+                                <tr>
+                                    <td class="center-text">@count</td>
+                                    <td class="center-text">@item.UserName</td>
+                                    <td class="center-text">@item.Email</td>
+                                    <td class="center-text">@item.PhoneNumber</td>
+                                    <td class="center-text">
+                                        @if (item.Gender == true) //true = Male
+                                        {
+                                            @Html.Raw("Male");
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Female");
+                                        }
+                                    </td>
+                                    
+                                    <td class="center-text">@item.TimeCreated</td>
+                                    <td class="center-text">@item.IsDeleted</td>
+                                    <td class="center-text">
+                                        <a href="/Admin/BlockUser/@item.UserId"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                count++;
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="pagination-holder container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-12 text-left">
+                        @Html.PagedListPager(Model.accounts, page => Url.Action("UserManagement", "Admin", new { page }))
+
+                    </div>
+                    @*<div class="col-xs-12 col-sm-6">
+                            <div class="result-counter">
+                                Showing <span>1-9</span> of <span>11</span> results
+                            </div>
+                        </div>*@
+
+                </div><!-- /.row -->
+            </div><!-- /.pagination-holder -->
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+

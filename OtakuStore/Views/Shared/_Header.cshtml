@@ -1,0 +1,21 @@
+﻿<nav class="top-bar animate-dropdown">
+    <div class="container">
+        <div class="col-xs-12 col-sm-6 no-margin">
+            <ul>
+                <li><a href="/Home/Index">Home</a></li>
+                <li><a href="/Home/Blog">Blog</a></li>
+                <li><a href="/Home/FAQ">FAQ</a></li>
+                <li><a href="/Home/Contact">Contact</a></li>
+            </ul>
+        </div><!-- /.col -->
+
+        <div class="col-xs-12 col-sm-6 no-margin">
+            <ul class="right">
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div><!-- /.col -->
+    </div><!-- /.container -->
+</nav><!-- /.top-bar -->
+<!-- ============================================================= TOP NAVIGATION : END ============================================================= -->
+
+@Html.Action("WebsiteAttributes", "Home", new { partialName = "_SearchMain" })

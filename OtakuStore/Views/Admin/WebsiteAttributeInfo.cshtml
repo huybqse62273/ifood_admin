@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "WebsiteAttributeInfo";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+
+@model OtakuStore.ViewModels.WebsiteAttributeViewModel
+
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="content-main">
+
+        <!--banner-->
+        <div class="banner">
+            <h2>
+                <a href="/Home/Index">Home</a>
+                <i class="fa fa-angle-right"></i>
+                <span>Website Attribute</span>
+            </h2>
+        </div>
+        <!--//banner-->
+        <!--grid-->
+        <div class="grid-form">
+            <!---->
+            <div class="grid-form1">
+                <div style="margin-left: 200px;"><h3>Edit Website Attributes</h3></div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="horizontal-form">
+                        <form class="form-horizontal" action="/Admin/EditWebsiteAttributes" method="post">
+                            <input type="hidden" name="id" value="@Model.websiteAttribute.id" />
+                            <!--Name-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" class="form-control1" name="name" value="@Model.websiteAttribute.name" id="focusedinput" required placeholder="Input name of website">
+                                </div>
+                            </div>
+                            <!--Logo Image-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Logo</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="logo" value="@Model.websiteAttribute.logo">
+                                    <p class="help-block">@Model.websiteAttribute.logo</p>
+                                </div>
+                            </div>
+                            <!--Description-->
+                            <div class="form-group">
+                                <label for="txtarea1" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <textarea name="description" id="description" cols="100" rows="6" class="form-control1">@Model.websiteAttribute.description</textarea>
+                                </div>
+                            </div>
+                            <!--Address-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" value="@Model.websiteAttribute.address" class="form-control1" name="address" id="focusedinput" required placeholder="Input address of website">
+                                </div>
+                            </div>
+                            <!--Country-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Country</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" value="@Model.websiteAttribute.country" class="form-control1" name="country" id="focusedinput" required placeholder="Input country of website">
+                                </div>
+                            </div>
+                            <!--City-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" value="@Model.websiteAttribute.city" class="form-control1" name="city" id="focusedinput" required placeholder="Input city of website">
+                                </div>
+                            </div>
+                            <!--District-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">District</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" value="@Model.websiteAttribute.district" class="form-control1" name="district" id="focusedinput" required placeholder="Input district of website">
+                                </div>
+                            </div>
+                            <!--Phone-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Phone Number</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" pattern="[0-9]{9,11}" value="@Model.websiteAttribute.phone" class="form-control1" name="phone" id="focusedinput" required placeholder="Input phone number of website">
+                                </div>
+                            </div>
+                            <!--Location-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Location</label>
+                                @{ var s = Model.websiteAttribute.location;
+                                    string[] location = s.Split(',');
+                                    }
+                                <div class="col-sm-8 col-md-4">
+                                    <input type="text" value="@location.ElementAt(0)" class="form-control1" name="x_cor" id="focusedinput" required placeholder="Input X coordinates of website">
+                                </div>
+                                <div class="col-sm-8 col-md-4">
+                                    <input type="text" value="@location.ElementAt(1)" class="form-control1" name="y_cor" id="focusedinput" required placeholder="Input Y coordinates of website">
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <button class="btn-primary btn" type="submit">Submit</button>
+                                        @*<button class="btn-default btn">Cancel</button>*@
+                                        <button class="btn-inverse btn" type="reset">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//grid-->
+                <!---->
+                <div class="copy">
+                    <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+
+<script>
+    $(document).ready(function () {
+        if (@Html.Raw(Json.Encode(ViewBag.notify)) != null) {
+            alert("Edit successful!");
+        }
+    });
+</script>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Data.FAQ>
+<br />
+<br />
+<div class="container">
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader"><h3>General questions</h3></div>
+        <hr />
+        @{ int count = 0;
+
+        }
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse@(count)">@item.Title</a>
+                    </h4>
+                </div>
+                <div id="collapse@(count++)" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @Html.Raw(item.Description)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

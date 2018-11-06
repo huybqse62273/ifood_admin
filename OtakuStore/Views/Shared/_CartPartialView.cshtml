@@ -1,0 +1,18 @@
+﻿<div class="basket-item-count">
+    <span class="count">@{var cart = Session["cart"] as List<Data.OrderProduct>;} @cart.Count</span>
+    <img src="~/Content/images/Slider/icon-cart.png" alt="" />
+</div>
+
+<div class="total-price-basket">
+    <span class="lbl">Your cart:</span>
+    <span class="total-price">
+        @{ double? total = 0;}
+        <span class="sign">$</span>@foreach (var item in Session["cart"] as List<Data.OrderProduct>)
+        {
+            total = total + (item.Price * item.Quantity);
+        }@total
+        <span class="value">
+        </span>
+    </span>
+</div>
+

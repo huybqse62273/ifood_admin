@@ -1,0 +1,61 @@
+﻿@model OtakuStore.ViewModels.MoreCommentViewModel
+
+@foreach (var item in Model.comments)
+{
+    <div class="comment-item">
+        <div class="row no-margin">
+            <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                <div class="avatar">
+                    <img alt="avatar" src="~/Content/Images/default-avatar.jpg">
+                </div><!-- /.avatar -->
+            </div><!-- /.col -->
+
+            <div class="col-xs-12 col-lg-11 col-sm-10 no-margin">
+                <div class="comment-body">
+                    <div class="meta-info">
+                        <div class="author inline">
+                            <a href="#" class="bold">@item.Account.Email</a>
+                        </div>
+                        <div class="star-holder inline">
+                            <div class="stars" data-score="@item.Rate"></div>
+                        </div>
+                        <div class="date inline pull-right">
+                            @item.dateCreate.ToString("dd MM yyyy")
+                        </div>
+                    </div><!-- /.meta-info -->
+                    <p class="comment-text">
+                        @item.Comment1
+                    </p><!-- /.comment-text -->
+                </div><!-- /.comment-body -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.comment-item -->
+}
+@if (Model.isNext)
+{
+    <div onClick = "this.style.visibility= 'hidden';">
+        @Ajax.ActionLink("Load More Comments",//title
+                           "MoreComments",//action,
+                           "Product",//controller
+                           new { offset = Model.offset, productID = Model.productId }
+                           , new AjaxOptions()
+                           {
+                               HttpMethod = "GET",
+                               AllowCache = false,
+                               InsertionMode = InsertionMode.InsertAfter,
+                               UpdateTargetId = "posts-wrapper"
+                           },
+                           new { @class = "btn btn-default" }
+                           )
+    </div>
+
+}
+
+
+
+
+
+
+

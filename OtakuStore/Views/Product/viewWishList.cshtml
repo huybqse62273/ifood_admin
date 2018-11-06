@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Your Wishlist";
+}
+
+@model OtakuStore.Models.WishListViewModel
+
+<div class="main-content" id="wist-list">
+
+    <div class="row">
+        <div class="col-lg-10 center-block page-wishlist style-cart-page inner-bottom-xs">
+            <div class="inner-xs">
+                <div class="page-header">
+                    <h2 class="page-title">My Wishlist</h2>
+                </div>
+            </div><!-- /.section-page-title -->
+            @if (Model.wishList.Any())
+            {
+                foreach (var item in Model.wishList)
+                {
+                    if (Model.products.Where(m => m.Id == item.ProductID).Any())
+                    {
+                        var product = Model.products.Where(m => m.Id == item.ProductID).FirstOrDefault();
+                        <div class="items-holder" id="item-@item.Id">
+                            <div class="container-fluid wishlist_table">
+                                <div class="row cart-item cart_item" id="yith-wcwl-row-1">
+                                    <div class="col-xs-12 col-sm-1 no-margin">
+                                        @Ajax.ActionLink("x", "addToWishList", "Product", new { id = item.ProductID, urlCallBack = "" },
+                               new AjaxOptions()
+                               {
+                                   HttpMethod = "GET",
+                                   AllowCache = false,
+                                   OnSuccess = "OnComplete"
+                               },
+                               new { @class = "remove_from_wishlist remove-item " + item.Id, @title = "Remove this product", @onclick = "removeOutWishlist(this)" })
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1 no-margin">
+                                        @if (Model.images.Where(m => m.ProductID == item.ProductID).Any())
+                                        {
+                                            if (product.SaleRate > 0)
+                                            {
+                                                <div class="ribbon red"><span>sale</span></div>
+                                            }
+                                            if (DateTime.Now.Subtract(DateTime.Parse(product.DateCreated.ToString())).TotalDays <= 3)
+                                            {
+                                                <div class="ribbon blue"><span>new!</span></div>
+                                            }
+                                            if (product.OrderCounter > 100)
+                                            {
+                                                <div class="ribbon green"><span>Best Seller</span></div>
+                                            }
+                                            <a href="/Product/ProductDetail/@item.ProductID">
+                                                <img width="73" height="73" alt="Figure Image" class="attachment-shop_thumbnail wp-post-image" src="@Model.images.Where(m => m.ProductID == item.ProductID).FirstOrDefault().Link">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="single-product.html">
+                                                <img width="73" height="73" alt="Figure Image" class="attachment-shop_thumbnail wp-post-image" src="">
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 no-margin">
+                                        <div class="title">
+                                            <a href="/Product/ProductDetail/@item.ProductID">@product.Name</a>
+                                        </div><!-- /.title -->
+                                        @if (product.StatusID == 1 || product.StatusID == 5)
+                                        {
+                                            <div>
+                                                <span class="label label-success wishlist-in-stock">In Stock</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <span class="label label-danger wishlist-out-of-stock">Out of Stock</span>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-3 no-margin" style="text-align: right;">
+                                        <div class="price">
+
+                                            @if (product.SaleRate > 0)
+                                            {
+                                                <div class="price-prev" style="text-decoration: line-through;color: lightgray;">
+                                                    @product.Price.Value.ToString("#,###0")
+                                                </div>
+                                            }
+
+                                            <div class="price-current">
+                                                @((product.Price.Value - (product.Price.Value * product.SaleRate) / 100).ToString("#,###0"))
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        @if (product.StatusID == 1 || product.StatusID == 5)
+                                        {
+                                            <div class="text-right">
+                                                <div class="add-cart-button">
+                                                    @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button add_to_cart_button product_type_simple" }
+                                    )
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-right">
+                                                <div class="add-cart-button">
+                                                    @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button disabled product_type_simple" }
+                                    )
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div><!-- /.cart-item -->
+                            </div><!-- /.wishlist-table -->
+                        </div><!-- /.items-holder -->
+                    }
+
+                }
+            }
+            else
+            {
+                <div class="col-xs-12 col-md-12 items-holder no-margin">
+                    <div style="text-align:center">
+                        <img src="~/Content/Images/cart-empty.png" alt="" /><br />
+                        Không có sản phẩm nào trong danh sách yêu thích của bạn.<br /><br />
+                        <a class="le-button" href="/Home/Index">Continue shopping</a>
+                    </div>
+                </div>
+            }
+        </div><!-- .large-->
+    </div>
+</div>
+
+<script>
+    function removeOutWishlist(obj) {
+        var thisClass = obj.getAttribute("class");
+        thisClass = thisClass.split(" ");
+        var itemId = "item-" + thisClass[thisClass.length - 1];
+
+        var itemRemove = document.getElementById(itemId);
+        itemRemove.style.transition = "all 2s";
+        itemRemove.style.opacity = "0";
+        window.setTimeout(function () {
+            itemRemove.style.display = "none";
+        }, 1000);
+    }
+
+</script>

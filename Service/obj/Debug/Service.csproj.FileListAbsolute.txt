@@ -1,0 +1,105 @@
+C:\Users\USER\Desktop\OtakuStore\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Service.dll.config
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Service.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Service.pdb
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Data.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\EntityFramework.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Newtonsoft.Json.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Helpers.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Mvc.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Razor.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Http.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Data.pdb
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Data.dll.config
+C:\Users\USER\Desktop\OtakuStore\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\USER\Desktop\OtakuStore\Service\obj\Debug\Service.dll
+C:\Users\USER\Desktop\OtakuStore\Service\obj\Debug\Service.pdb
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\EntityFramework.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\Newtonsoft.Json.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Helpers.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Mvc.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Razor.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Web.Http.xml
+C:\Users\USER\Desktop\OtakuStore\Service\bin\Debug\System.Net.Http.Formatting.xml
+D:\Otaku-Store\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+D:\Otaku-Store\Service\bin\Debug\Service.dll.config
+D:\Otaku-Store\Service\bin\Debug\Service.dll
+D:\Otaku-Store\Service\bin\Debug\Service.pdb
+D:\Otaku-Store\Service\bin\Debug\Data.dll
+D:\Otaku-Store\Service\bin\Debug\EntityFramework.dll
+D:\Otaku-Store\Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Otaku-Store\Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Otaku-Store\Service\bin\Debug\Newtonsoft.Json.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.Helpers.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.Http.WebHost.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.Mvc.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.Razor.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Otaku-Store\Service\bin\Debug\System.Web.Http.dll
+D:\Otaku-Store\Service\bin\Debug\System.Net.Http.Formatting.dll
+D:\Otaku-Store\Service\bin\Debug\Data.pdb
+D:\Otaku-Store\Service\bin\Debug\Data.dll.config
+D:\Otaku-Store\Service\bin\Debug\EntityFramework.xml
+D:\Otaku-Store\Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\Otaku-Store\Service\bin\Debug\Newtonsoft.Json.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.Helpers.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.Http.WebHost.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.Mvc.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.Razor.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Otaku-Store\Service\bin\Debug\System.Web.Http.xml
+D:\Otaku-Store\Service\bin\Debug\System.Net.Http.Formatting.xml
+D:\Otaku-Store\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+D:\Otaku-Store\Service\obj\Debug\Service.dll
+D:\Otaku-Store\Service\obj\Debug\Service.pdb
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Service.dll.config
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Service.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Service.pdb
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Data.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\EntityFramework.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Newtonsoft.Json.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Helpers.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Http.WebHost.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Mvc.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Razor.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Http.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Net.Http.Formatting.dll
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Data.pdb
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Data.dll.config
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\EntityFramework.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\Newtonsoft.Json.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Helpers.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Http.WebHost.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Mvc.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Razor.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Web.Http.xml
+D:\Study\PRN292\Project C#\New folder\Service\bin\Debug\System.Net.Http.Formatting.xml
+D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.dll
+D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.pdb

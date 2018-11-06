@@ -1,0 +1,130 @@
+﻿@model OtakuStore.ViewModels.RecentlyReviewViewModel
+
+<!-- ========================================= RECENTLY VIEWED ========================================= -->
+            <section id="recently-reviewd" class="wow fadeInUp">
+                <div class="container">
+                    <div class="carousel-holder hover">
+
+                        <div class="title-nav">
+                            <h2 class="h1">Recently Viewed</h2>
+                            <div class="nav-holder">
+                                <a href="#prev" data-target="#owl-recently-viewed" class="slider-prev btn-prev fa fa-angle-left"></a>
+                                <a href="#next" data-target="#owl-recently-viewed" class="slider-next btn-next fa fa-angle-right"></a>
+                            </div>
+                        </div><!-- /.title-nav -->
+
+                        <div id="owl-recently-viewed" class="owl-carousel product-grid-holder">
+                            <!--Cần chỉnh sửa lại recent reviewed dựa vào số lượt xem sản phẩm của user
+                                Để tạm thời như vầy-->
+                            @foreach (var item in Model.products.Where(p => p.isDelete == false).OrderByDescending(d => d.C_View).Take(10))
+                            {
+                                <div class="no-margin carousel-item product-item-holder size-small hover">
+                                    <div class="product-item">
+                                        @if (item.SaleRate > 0)
+                                        {
+                                            <div class="ribbon red"><span>sale</span></div>
+                                        }
+                                        @if (DateTime.Now.Subtract(DateTime.Parse(item.DateCreated.ToString())).TotalDays <= 3)
+                                        {
+                                            <div class="ribbon blue"><span>new!</span></div>    
+                                        }
+                                        @if (item.OrderCounter > 100)
+                                        {
+                                            <div class="ribbon green"><span>Best Seller</span></div>
+                                        }
+                                        @if (Model.images.Where(d => d.ProductID == item.Id).Any())
+                                        {
+                                            <div class="image">
+                                                <img alt="" src="@Model.images.Where(d => d.ProductID == item.Id).First().Link" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image">
+                                                <img alt="Anh-Figure" src="" />
+                                            </div>
+                                        }
+                                        <div class="body">
+                                            @if (item.SaleRate > 0)
+                                            {
+                                                <div class="label-discount green">@item.SaleRate% sale</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="label-discount">&nbsp;</div>
+                                            }
+                                            <div class="title limit-text">
+                                                <a href="/Product/ProductDetail/@item.Id">@item.Name</a>
+                                            </div>
+                                            <div class="brand">@Model.manufactors.Where(d => d.Id == item.ManufactorID).FirstOrDefault().Name</div>
+                                        </div>
+                                        <div class="prices">
+                                            <div class="price-current text-right">@((item.Price.Value - (item.Price.Value * item.SaleRate) / 100).ToString("#,###0"))</div>
+                                        </div>
+
+                                        <div class="hover-area">
+                                            <div class="add-cart-button">
+                                                @*<a href="/Cart/addToCart/@item.Id" class="le-button">Add to Cart</a>*@
+                                                @if (item.StatusID == 1 || item.StatusID == 5)
+                                                {
+                                                    @Ajax.ActionLink("add to cart",//title
+                                    "addToCart",//action,
+                                    "Cart",//controller
+                                    new { id = item.Id }
+                                    , new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        AllowCache = false,
+                                        OnSuccess = "OnComplete"
+                                    }, new { @class = "le-button" }
+                                    )
+                                                }
+                                                else
+                                                {
+                                                    <a class="le-button disabled product_type_simple">add to cart</a>
+                                                }
+                                            </div>
+                                            <div class="wish-compare @item.Id">
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    if (Model.wishLists.Where(m => m.ProductID == item.Id).Any())
+                                                    {
+                                                        @Ajax.ActionLink("added", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist btn-added-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                    }
+                                                    else
+                                                    {
+                                                        @Ajax.ActionLink("Add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "" },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "GET",
+                                                        AllowCache = false,
+                                                        OnSuccess = "OnComplete",
+                                                    }, new { @class = "btn-add-to-wishlist", onclick = "checkAdded(this)" }
+                                                   )
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink("add to wishlist", "addToWishList", "Product", new { id = item.Id, urlCallBack = "/Home/Index/" }, new { @class = "btn-add-to-wishlist" })
+                                                }
+                                                @*<a class="btn-add-to-compare" href="#">compare</a>*@
+                                            </div>
+                                        </div>
+                                    </div><!-- /.product-item -->
+                                </div><!-- /.product-item-holder -->
+                            }
+                            
+
+                        </div><!-- /#recently-carousel -->
+
+                    </div><!-- /.carousel-holder -->
+                </div><!-- /.container -->
+            </section><!-- /#recently-reviewd -->
+            <!-- ========================================= RECENTLY VIEWED : END ========================================= -->

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "viewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model OtakuStore.ViewModels.ShowCartViewModel
+
+<div id="cart-page">
+      @Html.Action("showCart", "Cart")
+</div>
+
+

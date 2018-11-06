@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "BlogIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model OtakuStore.ViewModels.BlogViewModel
+<div class="animate-dropdown">
+    <!-- ========================================= BREADCRUMB ========================================= -->
+    <div id="top-mega-nav">
+        <div class="container">
+            <nav>
+                <ul class="inline">
+                    <li class="dropdown le-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-list"></i> Otaku Store
+                        </a>
+                    </li>
+
+                    <li class="breadcrumb-nav-holder">
+                        <ul>
+                            <li class="breadcrumb-item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item current gray">
+                                <a href="about.html">Blog</a>
+                            </li>
+                        </ul>
+                    </li><!-- /.breadcrumb-nav-holder -->
+                </ul>
+            </nav>
+        </div><!-- /.container -->
+    </div><!-- /#top-mega-nav -->
+    <!-- ========================================= BREADCRUMB : END ========================================= -->
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.listBlog)
+        {
+            if (item.IsHidden == false)
+            {
+                <div class="col-md-3 blog-box">
+                    <div class="blog-image">
+                        <img alt="" src="@item.BlogImage" />
+                    </div>
+                    <div class="blog-title limit-text">
+                        <a href="/Home/BlogIndex/@item.Id">@item.Title</a>
+                    </div>
+                    <div class="blog-content limit-text-blog">
+                        @Html.Raw(item.Description)
+                    </div>
+                    <div class="blog-read-more">
+                        <a href="/Home/BlogIndex/@item.Id">Read more...</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

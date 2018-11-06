@@ -1,0 +1,67 @@
+﻿@model Data.FAQ
+@{
+    ViewBag.Title = "NewFAQ";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="content-main">
+
+        <!--banner-->
+        <div class="banner">
+            <h2>
+                <a href="/Home/Index">Home</a>
+                <i class="fa fa-angle-right"></i>
+                <a href="/Home/Blog"><span>FAQ</span></a>
+            </h2>
+        </div>
+        <!--//banner-->
+        <!--grid-->
+        <div class="grid-form">
+            <!---->
+            <div class="grid-form1">
+                <div style="margin-left: 200px;"><h3>Edit FAQ</h3></div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="horizontal-form">
+                        <form class="form-horizontal" action="/Admin/editFAQ/" method="post">
+                            @Html.AntiForgeryToken()
+                            <!--Hidden Field-->
+                            <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+                            @Html.HiddenFor(m => m.isHidden, new { @Value = Model.isHidden })
+                            <!--Title-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">FAQ Title</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" class="form-control1" name="Title" value="@Model.Title" id="focusedinput" required placeholder="Input blog's title">
+                                </div>
+                            </div>
+                            <!--Description-->
+                            <div class="form-group">
+                                <label for="txtarea1" class="col-sm-2 control-label">FAQ Answer</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <textarea name="Description" id="Description" cols="100" rows="6" class="form-control1">@Model.Description</textarea>
+                                    <script>CKEDITOR.replace('Description');</script></div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <button class="btn-primary btn" type="submit">Submit</button>
+                                        <button class="btn-inverse btn" type="reset">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//grid-->
+                <!---->
+                <div class="copy">
+                    <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
