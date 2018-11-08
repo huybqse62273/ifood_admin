@@ -4,6 +4,8 @@
     Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
 }
 
+@model OtakuStore.ViewModels.AdminIndexViewModel
+
 <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="content-main">
 
@@ -32,7 +34,9 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach(var item in Model.list)
+                        {
+                        }
                     </tbody>
                 </table>
 </div>
