@@ -52,13 +52,43 @@ namespace OtakuStore.Admin.Controllers
             this._faqService = _faqService;
         }
         #endregion
-        public ActionResult AdminIndex(string username)
+
+
+        //=============Admin Index action=============//
+        public ActionResult AdminIndex()
         {
             var db = new IFood();
-
             AdminIndexViewModel model = new AdminIndexViewModel();
-            model.list = db.Dishes.Select(x =>x).ToList<Dish>();
+            model.listDish = db.Dishes.Select(d=> d).ToList<Dish>();
             ViewBag.UserName = username;
+            return View(model);
+        }
+
+        public ActionResult DisableDish(string id)
+        {
+            var db = new IFood();
+            db.Dishes.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Dish>().IsActive = false;
+            db.SaveChanges();
+
+            return RedirectToAction("AdminIndex" , "Admin");
+        }
+
+        public ActionResult EnableDish(string id)
+        {
+            var db = new IFood();
+            db.Dishes.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Dish>().IsActive = true;
+            db.SaveChanges();
+
+            return RedirectToAction("AdminIndex", "Admin");
+        }
+
+        //=============Orders Index action=============//
+
+        public ActionResult OrdersIndex()
+        {
+            var db = new IFood();
+            OrdersViewModel model = new OrdersViewModel();
+            model.listTransasction = db.Transactions.Select(t => t).ToList<Transaction>();
             return View(model);
         }
 

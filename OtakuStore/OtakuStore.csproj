@@ -226,10 +226,12 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminIndexViewModel.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MessageSendingViewModel.cs" />
     <Compile Include="ViewModels\MoreCommentViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RecentlyReviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -829,6 +831,7 @@
     <Content Include="Views\Product\addToWishList.cshtml" />
     <Content Include="Views\Error\noneCartCheckOut.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\OrdersIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\Models\" />

@@ -8,6 +8,6 @@ namespace OtakuStore.ViewModels
 {
     public class AdminIndexViewModel
     {
-        public List<Dish> list { get; set; }
+        public List<Dish> listDish { get; set; }
     }
 }
