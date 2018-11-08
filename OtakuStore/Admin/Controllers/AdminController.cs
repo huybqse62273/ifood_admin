@@ -57,8 +57,7 @@ namespace OtakuStore.Admin.Controllers
             var db = new IFood();
 
             AdminIndexViewModel model = new AdminIndexViewModel();
-            model.list = db.Dishes.Join(db.Users, d => d.AuthorId,
-                u => u.Id, (d, u) => new { Dish = d, User = u }).ToList<Object>();
+            model.listDish = db.Dishes.Select(d=> d).ToList<Dish>();
             ViewBag.UserName = username;
             return View(model);
         }

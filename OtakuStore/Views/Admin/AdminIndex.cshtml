@@ -34,8 +34,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model.list)
+                        @foreach(var item in Model.listDish)
                         {
+                            <tr>
+                                <th>@item.Name</th>
+                                <th>@item.User.Name</th>
+                                <th>@item.CreateOn</th>
+                                <th>@item.Rate</th>
+                                <th>@if(item.IsActive == true)
+                                {
+                                    <p>Active</p>
+                                }
+                                else
+                                {
+                                    <p>Inactive</p>
+                                }
+                                </th>
+                                <th>
+                                    
+                                </th>
+                            </tr>
                         }
                     </tbody>
                 </table>
