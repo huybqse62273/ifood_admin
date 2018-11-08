@@ -54,6 +54,13 @@ namespace OtakuStore.Admin.Controllers
         #endregion
         public ActionResult AdminIndex()
         {
+            var db = new IFood();
+            Category c = new Category
+            {
+                Id = Guid.NewGuid(),
+
+            };
+           
             return View();
         }
 

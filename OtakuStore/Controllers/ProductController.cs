@@ -71,8 +71,7 @@ namespace OtakuStore.Controllers
                     tags.Add(_tagService.GetAll().FirstOrDefault(m => m.Id == item.TagID));
                 }
                 p.tags = tags;
-                Category category = categories.FirstOrDefault(m => m.id == product.CategoryID);
-                p.category = category;
+         
                 Manufactor manufactor = manufactors.FirstOrDefault(m => m.Id == product.ManufactorID);
                 p.manufactor = manufactor;
                 Status s = status.FirstOrDefault(m => m.Id == product.StatusID);

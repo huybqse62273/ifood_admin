@@ -50,11 +50,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\OtakuStore\bin\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\OtakuStore\bin\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\OtakuStore\bin\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -66,7 +70,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Helpers">
       <HintPath>..\OtakuStore\bin\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -101,8 +106,18 @@
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\BlogImage.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Category_Dish.cs" />
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\CookBook.cs" />
+    <Compile Include="Model\CookBook_Dish.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Course_Dish.cs" />
+    <Compile Include="Model\DietaryPreference.cs" />
+    <Compile Include="Model\DietaryType.cs" />
     <Compile Include="Model\Discount.cs" />
+    <Compile Include="Model\Dish.cs" />
+    <Compile Include="Model\Dish_Ingredient.cs" />
+    <Compile Include="Model\Document.cs" />
     <Compile Include="Model\FAQ.cs" />
     <Compile Include="Model\Image.cs" />
     <Compile Include="Infrastructure\BaseRepository.cs" />
@@ -112,11 +127,23 @@
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Model\Ingredient.cs" />
+    <Compile Include="Model\IngredientType.cs" />
+    <Compile Include="Model\IngredientType_Dietary.cs" />
     <Compile Include="Model\Manufactor.cs" />
     <Compile Include="Model\MessageSending.cs" />
+    <Compile Include="Model\IFood.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderProduct.cs" />
+    <Compile Include="Model\Review.cs" />
+    <Compile Include="Model\ShoppingList.cs" />
+    <Compile Include="Model\StepByStep.cs" />
+    <Compile Include="Model\sysdiagram.cs" />
+    <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\User_Dietary.cs" />
     <Compile Include="Model\WebsiteAttribute.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -155,6 +182,7 @@
     <None Include="App.config" />
     <None Include="bin\Debug\Data.dll.config" />
     <None Include="obj\Release\Data.csproj.CoreCompileInputs.cache" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

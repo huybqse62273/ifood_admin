@@ -6,16 +6,16 @@ namespace Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
-    public partial class Category
+    public partial class DietaryPreference
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public DietaryPreference()
         {
-            Category_Dish = new HashSet<Category_Dish>();
+            IngredientType_Dietary = new HashSet<IngredientType_Dietary>();
+            User_Dietary = new HashSet<User_Dietary>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -23,15 +23,16 @@ namespace Data.Model
 
         public string Description { get; set; }
 
-        public bool? IsActive { get; set; }
+        public int? TypeId { get; set; }
 
         public bool? IsDelete { get; set; }
 
-        public string ImageLink { get; set; }
-
-        public int? DisplayOrder { get; set; }
+        public virtual DietaryType DietaryType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category_Dish> Category_Dish { get; set; }
+        public virtual ICollection<IngredientType_Dietary> IngredientType_Dietary { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Dietary> User_Dietary { get; set; }
     }
 }

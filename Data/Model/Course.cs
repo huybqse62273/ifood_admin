@@ -6,13 +6,13 @@ namespace Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
-    public partial class Category
+    [Table("Course")]
+    public partial class Course
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Course()
         {
-            Category_Dish = new HashSet<Category_Dish>();
+            Course_Dish = new HashSet<Course_Dish>();
         }
 
         public Guid Id { get; set; }
@@ -27,11 +27,7 @@ namespace Data.Model
 
         public bool? IsDelete { get; set; }
 
-        public string ImageLink { get; set; }
-
-        public int? DisplayOrder { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category_Dish> Category_Dish { get; set; }
+        public virtual ICollection<Course_Dish> Course_Dish { get; set; }
     }
 }

@@ -6,13 +6,13 @@ namespace Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
-    public partial class Category
+    [Table("CookBook")]
+    public partial class CookBook
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public CookBook()
         {
-            Category_Dish = new HashSet<Category_Dish>();
+            CookBook_Dish = new HashSet<CookBook_Dish>();
         }
 
         public Guid Id { get; set; }
@@ -21,17 +21,19 @@ namespace Data.Model
         [StringLength(50)]
         public string Name { get; set; }
 
+        public Guid UserId { get; set; }
+
         public string Description { get; set; }
 
-        public bool? IsActive { get; set; }
+        public DateTime? CreateOn { get; set; }
 
         public bool? IsDelete { get; set; }
 
         public string ImageLink { get; set; }
 
-        public int? DisplayOrder { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category_Dish> Category_Dish { get; set; }
+        public virtual ICollection<CookBook_Dish> CookBook_Dish { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

@@ -6,16 +6,19 @@ namespace Data.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
-    public partial class Category
+    [Table("Ingredient")]
+    public partial class Ingredient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Ingredient()
         {
-            Category_Dish = new HashSet<Category_Dish>();
+            Dish_Ingredient = new HashSet<Dish_Ingredient>();
+            ShoppingLists = new HashSet<ShoppingList>();
         }
 
         public Guid Id { get; set; }
+
+        public int? TypeId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -23,15 +26,19 @@ namespace Data.Model
 
         public string Description { get; set; }
 
-        public bool? IsActive { get; set; }
+        [StringLength(10)]
+        public string UnitId { get; set; }
+
+        public double? PricePerUnit { get; set; }
 
         public bool? IsDelete { get; set; }
 
-        public string ImageLink { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dish_Ingredient> Dish_Ingredient { get; set; }
 
-        public int? DisplayOrder { get; set; }
+        public virtual IngredientType IngredientType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category_Dish> Category_Dish { get; set; }
+        public virtual ICollection<ShoppingList> ShoppingLists { get; set; }
     }
 }
