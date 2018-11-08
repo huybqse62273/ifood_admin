@@ -53,7 +53,9 @@ namespace OtakuStore.Admin.Controllers
         }
         #endregion
 
-        public ActionResult AdminIndex(string username)
+
+        //=============Admin Index action=============//
+        public ActionResult AdminIndex()
         {
             var db = new IFood();
             AdminIndexViewModel model = new AdminIndexViewModel();
@@ -80,7 +82,15 @@ namespace OtakuStore.Admin.Controllers
             return RedirectToAction("AdminIndex", "Admin");
         }
 
+        //=============Orders Index action=============//
 
+        public ActionResult OrdersIndex()
+        {
+            var db = new IFood();
+            OrdersViewModel model = new OrdersViewModel();
+            model.listTransasction = db.Transactions.Select(t => t).ToList<Transaction>();
+            return View(model);
+        }
 
         //=============Login action=============//
         public ActionResult Login()

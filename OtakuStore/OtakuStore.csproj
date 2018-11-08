@@ -231,6 +231,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MessageSendingViewModel.cs" />
     <Compile Include="ViewModels\MoreCommentViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RecentlyReviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -830,6 +831,7 @@
     <Content Include="Views\Product\addToWishList.cshtml" />
     <Content Include="Views\Error\noneCartCheckOut.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\OrdersIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\Models\" />
