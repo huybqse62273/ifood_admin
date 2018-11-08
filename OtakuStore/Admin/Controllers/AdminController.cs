@@ -52,7 +52,7 @@ namespace OtakuStore.Admin.Controllers
             this._faqService = _faqService;
         }
         #endregion
-        public ActionResult AdminIndex()
+        public ActionResult AdminIndex(string username)
         {
             //var db = new IFood();
             //User user = new User();
@@ -68,8 +68,24 @@ namespace OtakuStore.Admin.Controllers
 
             //db.Users.Add(user);
             //db.SaveChanges();
-
+            ViewBag.UserName = username;
             return View();
+        }
+
+        //=============Login action=============//
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult CheckLogin(string username, string pass)
+        {
+            if(username.Equals("admin") && pass.Equals("admin"))
+            {
+                return RedirectToAction("AdminIndex", "Admin", new {username = username });
+            }
+            ViewBag.ErrorMess = "Invalid username or password";
+            return View("Login");
         }
     }
 }

@@ -82,3 +82,25 @@ D:\Study\PRN292\Project C#\New folder\Data\obj\Debug\Data.csprojResolveAssemblyR
 D:\Study\PRN292\Project C#\New folder\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
 D:\Study\PRN292\Project C#\New folder\Data\obj\Debug\Data.dll
 D:\Study\PRN292\Project C#\New folder\Data\obj\Debug\Data.pdb
+D:\huybqse62273\ifood_admin\Data\bin\Debug\Data.dll.config
+D:\huybqse62273\ifood_admin\Data\bin\Debug\Data.dll
+D:\huybqse62273\ifood_admin\Data\bin\Debug\Data.pdb
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Http.dll
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Net.Http.Formatting.dll
+D:\huybqse62273\ifood_admin\Data\bin\Debug\EntityFramework.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\Newtonsoft.Json.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Helpers.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Http.WebHost.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Mvc.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Razor.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.WebPages.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.WebPages.Razor.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Web.Http.xml
+D:\huybqse62273\ifood_admin\Data\bin\Debug\System.Net.Http.Formatting.xml
+D:\huybqse62273\ifood_admin\Data\obj\Debug\Data.csprojAssemblyReference.cache
+D:\huybqse62273\ifood_admin\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+D:\huybqse62273\ifood_admin\Data\obj\Debug\Data.csproj.CopyComplete
+D:\huybqse62273\ifood_admin\Data\obj\Debug\Data.dll
+D:\huybqse62273\ifood_admin\Data\obj\Debug\Data.pdb

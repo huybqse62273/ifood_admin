@@ -103,3 +103,39 @@ D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.csprojResolveAss
 D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
 D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.dll
 D:\Study\PRN292\Project C#\New folder\Service\obj\Debug\Service.pdb
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Service.dll.config
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Service.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Service.pdb
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Data.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\EntityFramework.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Newtonsoft.Json.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Helpers.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Http.WebHost.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Mvc.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Razor.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.Razor.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Http.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Net.Http.Formatting.dll
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Data.pdb
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Data.dll.config
+D:\huybqse62273\ifood_admin\Service\bin\Debug\EntityFramework.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\Newtonsoft.Json.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Helpers.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Http.WebHost.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Mvc.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Razor.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.WebPages.Razor.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Web.Http.xml
+D:\huybqse62273\ifood_admin\Service\bin\Debug\System.Net.Http.Formatting.xml
+D:\huybqse62273\ifood_admin\Service\obj\Debug\Service.csprojAssemblyReference.cache
+D:\huybqse62273\ifood_admin\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+D:\huybqse62273\ifood_admin\Service\obj\Debug\Service.csproj.CopyComplete
+D:\huybqse62273\ifood_admin\Service\obj\Debug\Service.dll
+D:\huybqse62273\ifood_admin\Service\obj\Debug\Service.pdb

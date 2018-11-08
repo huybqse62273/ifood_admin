@@ -99,11 +99,11 @@ namespace OtakuStore.Controllers
 
         public PartialViewResult WebsiteAttributes(string partialName)
         {
-            WebsiteAttribute websiteAttribute = _websiteAttributeService.GetAll().First();
-            WebsiteAttributeViewModel model = new WebsiteAttributeViewModel();
-            model.websiteAttribute = websiteAttribute;
+            //WebsiteAttribute websiteAttribute = _websiteAttributeService.GetAll().First();
+            //WebsiteAttributeViewModel model = new WebsiteAttributeViewModel();
+            //model.websiteAttribute = websiteAttribute;
 
-            return PartialView(partialName, model);
+            return PartialView();//partialName, model
         }
 
         public int WishList()
