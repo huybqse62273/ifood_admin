@@ -54,22 +54,12 @@ namespace OtakuStore.Admin.Controllers
         #endregion
         public ActionResult AdminIndex(string username)
         {
-            //var db = new IFood();
-            //User user = new User();
-            //user.Id = Guid.NewGuid();
-            //user.Name = "testcuahuy";
-            //user.Email = "huybqse@gamial.com";
-            //user.Password = "123";
-            //user.PhoneNumber = "01665169260";
-            //user.City = "HCM";
-            //user.District = "Quan tan binh";
-            //user.Address = "asf";
-            //user.IsDelete = false;
+            var db = new IFood();
 
-            //db.Users.Add(user);
-            //db.SaveChanges();
+            AdminIndexViewModel model = new AdminIndexViewModel();
+            model.list = db.Dishes.Select(x =>x).ToList<Dish>();
             ViewBag.UserName = username;
-            return View();
+            return View(model);
         }
 
         //=============Login action=============//
