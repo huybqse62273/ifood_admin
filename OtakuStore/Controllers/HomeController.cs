@@ -99,11 +99,11 @@ namespace OtakuStore.Controllers
 
         public PartialViewResult WebsiteAttributes(string partialName)
         {
-            WebsiteAttribute websiteAttribute = _websiteAttributeService.GetAll().First();
-            WebsiteAttributeViewModel model = new WebsiteAttributeViewModel();
-            model.websiteAttribute = websiteAttribute;
+            //WebsiteAttribute websiteAttribute = _websiteAttributeService.GetAll().First();
+            //WebsiteAttributeViewModel model = new WebsiteAttributeViewModel();
+            //model.websiteAttribute = websiteAttribute;
 
-            return PartialView(partialName, model);
+            return PartialView();//partialName, model
         }
 
         public int WishList()
@@ -226,11 +226,7 @@ namespace OtakuStore.Controllers
                 Manufactor manufactor = manufactors.Where(m => m.Name.ToLower().Equals(keyword)).FirstOrDefault();
                 list = _productService.Get().Where(p => p.isDelete == false).Where(m => m.ManufactorID == manufactor.Id).ToList();
             }
-            else if (categorys.Where(m => m.title.ToLower().Equals(keyword)).Any())//search theo type
-            {
-                Category type = categorys.Where(m => m.title.ToLower().Equals(keyword)).FirstOrDefault();
-                list = _productService.Get().Where(p => p.isDelete == false).Where(m => m.CategoryID == type.id).ToList();
-            }else if (tags.Where(m => m.Name.ToLower().Equals(keyword)).Any())
+            else if (tags.Where(m => m.Name.ToLower().Equals(keyword)).Any())
             {
                 Tag tag = tags.Where(m => m.Name.ToLower().Equals(keyword)).FirstOrDefault();
                 IEnumerable<ProductTag> productTags = _productTagService.GetAll().Where(m => m.TagID == tag.Id);

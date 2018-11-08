@@ -16,7 +16,7 @@ namespace OtakuStore
             routes.MapRoute(
                 name:"Home",
                 url: "",
-                defaults: new { Controller = "Admin", Action = "AdminIndex" });
+                defaults: new { Controller = "Admin", Action = "Login" });
 
             routes.MapRoute(
                name: "Product",
