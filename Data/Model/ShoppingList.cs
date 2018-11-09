@@ -13,7 +13,7 @@ namespace Data.Model
 
         public Guid UserId { get; set; }
 
-        public int TransactionId { get; set; }
+        public Guid TransactionId { get; set; }
 
         public Guid DishId { get; set; }
 

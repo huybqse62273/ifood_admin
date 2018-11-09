@@ -15,7 +15,7 @@ namespace Data.Model
             ShoppingLists = new HashSet<ShoppingList>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public Guid UserId { get; set; }
 
