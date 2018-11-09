@@ -106,5 +106,13 @@ namespace OtakuStore.Admin.Controllers
             ViewBag.ErrorMess = "Invalid username or password";
             return View("Login");
         }
+
+        public ActionResult clickListOrder()
+        {
+            var db = new IFood();
+            AdminIndexViewModel model = new AdminIndexViewModel();/// can dung order model
+            model.listDish = db.Dishes.Select(d => d).ToList<Dish>();
+            return View("ListOrder", model);
+        }
     }
 }
