@@ -110,9 +110,18 @@ namespace OtakuStore.Admin.Controllers
         public ActionResult clickListOrder()
         {
             var db = new IFood();
-            AdminIndexViewModel model = new AdminIndexViewModel();/// can dung order model
-            model.listDish = db.Dishes.Select(d => d).ToList<Dish>();
+            OrdersViewModel model = new OrdersViewModel();/// can dung order model
+            model.listTransasction = db.Transactions.Select(d => d).ToList<Transaction>();
             return View("ListOrder", model);
+        }
+        public ActionResult chageOderStatus(String id, int status)
+        {
+            status = (status + 1) / 3; // chỗ này click vào status sẽ đổi từ pending -> success -> cancel -> pending
+            var db = new IFood();
+            db.Transactions.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Transaction>().Status = status;
+            db.SaveChanges();
+
+            return RedirectToAction("CheckLogin", "Admin");
         }
     }
 }
