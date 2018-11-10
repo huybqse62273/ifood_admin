@@ -116,12 +116,12 @@ namespace OtakuStore.Admin.Controllers
         }
         public ActionResult chageOderStatus(String id, int status)
         {
-            status = (status + 1) / 3; // chỗ này click vào status sẽ đổi từ pending -> success -> cancel -> pending
+            status = (status + 1) % 3; // chỗ này click vào status sẽ đổi từ pending -> success -> cancel -> pending
             var db = new IFood();
             db.Transactions.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Transaction>().Status = status;
             db.SaveChanges();
 
-            return RedirectToAction("CheckLogin", "Admin");
+            return RedirectToAction("clickListOrder", "Admin");
         }
     }
 }

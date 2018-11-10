@@ -1,10 +1,11 @@
 ﻿
+
 @{
     ViewBag.Title = "ListOrder";
     Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
 }
 
-@model OtakuStore.ViewModels.AdminIndexViewModel
+@model OtakuStore.ViewModels.OrdersViewModel
 
 <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="content-main">
@@ -35,29 +36,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model.listTransasction)
+                        @foreach (var item in Model.listTransasction)
                         {
                             <tr>
-                                <th>@item.id</th>
+                                <th>@item.Id</th>
                                 <th>@item.User.Name</th>
                                 <th>@item.Address-@item.District-@item.City</th>
                                 <th>@item.TotalPrice</th>
                                 <th>@item.CreatedOn</th>
-                                <th>@item.Status</th>
-                                <th><a class="le-button big" href="/Admin/chageOderStatus/@item.id/@item.Status">
+                                <th>
+                                    <a class="le-button big" href="/Admin/chageOderStatus?id=@item.Id&status=@item.Status">
                                         @switch (item.Status)
                                         {
                                             case 0:
-                                                 <p>pending</p>
-                                                break;
+                                                <button type="button" class="btn btn-primary">pending</button>
+                                            break;
                                             case 1:
-                                                 <p>successful</p>
+                                                <button type="button" class="btn btn-success">successful</button>
                                                 break;
                                             case 2:
-                                                 <p>cancel</p>
+                                                <button type="button" class="btn btn-danger">cancel</button>
                                                 break;
-                                        }
-                                    </a>
+                                            }
+</a>
                                 </th>
                                 <th>
                                     <a class="le-button big" href="#">Edit</a>
@@ -66,21 +67,21 @@
                         }
                     </tbody>
                 </table>
-</div>
+            </div>
             <div class="col-md-8 content-top-2">
                 <!---start-chart---->
                 <!----->
                 <div class="content-graph">
                     @*<div class="content-color">
-                        <div class="content-ch">
-                            <p><i></i>Chrome </p><span>100%</span>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="content-ch1">
-                            <p><i></i>Safari</p><span> 50%</span>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>*@
+                            <div class="content-ch">
+                                <p><i></i>Chrome </p><span>100%</span>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="content-ch1">
+                                <p><i></i>Safari</p><span> 50%</span>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>*@
                     <!--graph-->
                     <link rel="stylesheet" href="~/Content/css/graph.css">
                     <!--//graph-->
