@@ -123,5 +123,14 @@ namespace OtakuStore.Admin.Controllers
 
             return RedirectToAction("clickListOrder", "Admin");
         }
+
+        //ingredient  -----------<><><>
+        public ActionResult clickListIngredient()
+        {
+            //var db = new IFood();
+            //Ingredient model = new OrdersViewModel();/// can dung order model
+            //model.listTransasction = db.Transactions.Select(d => d).ToList<Transaction>();
+            return View("ListIngredient");
+        }
     }
 }
