@@ -21,6 +21,8 @@ namespace Data.Model
 
         public string Description { get; set; }
 
+        public double? Amount { get; set; }
+
         public int? Status { get; set; }
 
         public virtual Dish Dish { get; set; }
