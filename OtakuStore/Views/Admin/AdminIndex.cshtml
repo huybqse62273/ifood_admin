@@ -38,11 +38,11 @@
                         @foreach(var item in Model.listDish)
                         {
                             <tr>
-                                <th>@item.Name</th>
-                                <th>@item.User.Name</th>
-                                <th>@item.CreateOn</th>
-                                <th>@item.Rate</th>
-                                <th>@if(item.IsActive == true)
+                                <td>@item.Name</td>
+                                <td>@item.User.Name</td>
+                                <td>@item.CreateOn</td>
+                                <td>@item.Rate</td>
+                                <td>@if(item.IsActive == true)
                                 {
                                     <p>Active</p>
                                 }
@@ -50,11 +50,11 @@
                                 {
                                     <p>Inactive</p>
                                 }
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <a class="le-button big" href="#">Edit</a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     @if (item.IsActive == true)
                                     {
                                         <a class="le-button big" href="/Admin/DisableDish/@item.Id">Disable</a>
@@ -63,7 +63,7 @@
                                     {
                                         <a class="le-button big" href="/Admin/EnableDish/@item.Id">Enable</a>
                                     }
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>

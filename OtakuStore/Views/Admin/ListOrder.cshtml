@@ -39,12 +39,12 @@
                         @foreach (var item in Model.listTransasction)
                         {
                             <tr>
-                                <th>@item.Id</th>
-                                <th>@item.User.Name</th>
-                                <th>@item.Address-@item.District-@item.City</th>
-                                <th>@item.TotalPrice</th>
-                                <th>@item.CreatedOn</th>
-                                <th>
+                                <td>@item.Id</td>
+                                <td>@item.User.Name</td>
+                                <td>@item.Address-@item.District-@item.City</td>
+                                <td>@item.TotalPrice</td>
+                                <td>@item.CreatedOn</td>
+                                <td>
                                     <a class="le-button big" href="/Admin/chageOderStatus?id=@item.Id&status=@item.Status">
                                         @switch (item.Status)
                                         {
@@ -59,10 +59,10 @@
                                                 break;
                                             }
 </a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <a class="le-button big" href="#">Edit</a>
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>

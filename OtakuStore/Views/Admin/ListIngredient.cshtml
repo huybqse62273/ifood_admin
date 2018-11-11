@@ -3,7 +3,7 @@
     ViewBag.Title = "ListIngredient";
     Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
 }
-
+@model OtakuStore.ViewModels.IngredientViewModel
 <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="content-main">
 
@@ -24,44 +24,46 @@
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>UserName</th>
-                            <th>address</th>
-                            <th>total price</th>
-                            <th>CreatedOn</th>
+                            <th>Name</th>
+                            <th>type</th>
+                            <th>Description</th>
+                            <th>Price/Unit</th>
+                            <th>UnitId</th>
                             <th>Status</th>
-                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @*@foreach (var item in Model.listTransasction)
-                        {
-                            <tr>
-                                <th>@item.Id</th>
-                                <th>@item.User.Name</th>
-                                <th>@item.Address-@item.District-@item.City</th>
-                                <th>@item.TotalPrice</th>
-                                <th>@item.CreatedOn</th>
-                                <th>
-                                    <a class="le-button big" href="/Admin/chageOderStatus?id=@item.Id&status=@item.Status">
-                                        @switch (item.Status)
-                                        {
-                                            case 0:
-                                                <button type="button" class="mybtn btn-primary">pending</button>
-                                                break;
-                                            case 1:
-                                                <button type="button" class="mybtn btn-success">successful</button>
-                                                break;
-                                            case 2:
-                                                <button type="button" class="mybtn btn-danger">cancel</button>
-                                                break;
-                                        }
-                                    </a>
-                                </th>
-                                <th>
-                                    <a class="le-button big" href="#">Edit</a>
-                                </th>
-                            </tr>
-                        }*@
+                        @foreach (var item in Model.listIngredient)
+                            {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>
+                                <a class="le-button big" href="#">
+                                    @switch (item.TypeId)
+                                    {
+                                        case 0:
+                                            <button type="button" class="mybtn btn-primary">pending</button>
+                                            break;
+                                        case 1:
+                                            <button type="button" class="mybtn btn-success">successful</button>
+                                            break;
+                                        case 2:
+                                            <button type="button" class="mybtn btn-danger">cancel</button>
+                                            break;
+                                    }
+                                </a>
+                            </td>
+                            <td>@item.Description</td>
+                            <td>@item.PricePerUnit</td>
+                            <td>@item.UnitId</td>
+                            <td>@item.IsDelete</td>
+
+                            <th>
+                                <a class="le-button big" href="#">Edit</a>
+                            </th>
+                        </tr>
+                            }
                     </tbody>
                 </table>
             </div>

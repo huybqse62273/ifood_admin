@@ -127,10 +127,10 @@ namespace OtakuStore.Admin.Controllers
         //ingredient  -----------<><><>
         public ActionResult clickListIngredient()
         {
-            //var db = new IFood();
-            //Ingredient model = new OrdersViewModel();/// can dung order model
-            //model.listTransasction = db.Transactions.Select(d => d).ToList<Transaction>();
-            return View("ListIngredient");
+            var db = new IFood();
+            IngredientViewModel model = new IngredientViewModel();/// can dung order model
+            model.listIngredient = db.Ingredients.Select(d => d).ToList<Ingredient>();
+            return View("ListIngredient",model);
         }
     }
 }
