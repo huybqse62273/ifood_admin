@@ -10,9 +10,9 @@
         <!--banner-->
         <div class="banner">
             <h2>
-                <a href="/Home/Index">Home</a>
+                <a href="/Admin/AdminIndex">Dish</a>
                 <i class="fa fa-angle-right"></i>
-                <a href="/Home/Blog"><span>Blog</span></a>
+                <a href="#"><span>Add</span></a>
             </h2>
         </div>
         <!--//banner-->
@@ -20,29 +20,47 @@
         <div class="grid-form">
             <!---->
             <div class="grid-form1">
-                <div style="margin-left: 200px;"><h3>Add New Blog</h3></div>
+                <div style="margin-left: 200px;"><h3>Add New Dish</h3></div>
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="horizontal-form">
                         <form class="form-horizontal" action="/Admin/AddNewBlog" method="post">
                             <!--Title-->
                             <div class="form-group">
-                                <label for="focusedinput" class="col-sm-2 control-label">Blog Title</label>
+                                <label for="focusedinput" class="col-sm-2 control-label">Title</label>
                                 <div class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control1" name="blog_title" value="" id="focusedinput" required placeholder="Input blog's title">
+                                    <input type="text" class="form-control1" name="dish_title" value="" id="focusedinput" required placeholder="Input dish's title">
                                 </div>
                             </div>
-                            <!--Blog Banner Image-->
+                            <!--Dish Image-->
                             <div class="form-group">
-                                <label for="exampleInputFile" class="col-sm-2 control-label">Blog Image</label>
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Dish Image</label>
                                 <div class="col-sm-8 col-md-8">
-                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="blog_image" value="">
-                                    <p class="help-block">Choose one image for blog banner</p>
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="dish_image" value="">
+                                    <p class="help-block">Choose one image for Dish banner</p>
+                                </div>
+                            </div>
+                            <!--Dish Step by step-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Step by step</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" name="dish_image" value="" placeholder="Step 1">
+                                </div>
+                            </div>
+                            <!--Dish Category-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Dish Category</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <select>
+                                        <option value="volvo">Gym Food</option>
+                                        <option value="saab">Healthy Food</option>
+                                        <option value="mercedes">Daily Food</option>
+                                    </select>
                                 </div>
                             </div>
                             <!--Description-->
                             <div class="form-group">
-                                <label for="txtarea1" class="col-sm-2 control-label">Blog Description</label>
+                                <label for="txtarea1" class="col-sm-2 control-label">Dish Description</label>
                                 <div class="col-sm-8 col-md-8">
                                     <textarea name="blog_description" id="blog_description" cols="100" rows="6" class="form-control1"></textarea>
                                     <script>CKEDITOR.replace('blog_description');</script>
