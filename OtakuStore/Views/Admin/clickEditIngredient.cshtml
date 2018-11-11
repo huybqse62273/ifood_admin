@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "clickEditIngredient";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+
+@model Data.Model.Ingredient
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="content-main">
+
+        <!--banner-->
+        <div class="banner">
+
+            <h2>
+                <a href="~/Admin/AdminIndex">Home</a>
+                <i class="fa fa-angle-right"></i>
+                <span>Dashboard</span>
+            </h2>
+        </div>
+        <!--//banner-->
+        <!--content-->
+        <div class="content-top" style="padding-left:20px;padding-right:20px;">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="ingredientId">Ingredient Id</label>
+                    <input type="text" id="ingredientId" class="form-control" disabled="disabled" value="@Model.Id" />
+                </div>
+                <div class="form-group">
+                    <label for="ingredientName">Name</label>
+                    <input type="text" id="ingredientName" class="form-control" placeholder="Name" value="@Model.Name" />
+                </div>
+                <div class="form-group">
+                    <label for="ingredientName">Name</label>
+                    <select type="text" id="ingredientName" class="form-control" value="@Model.TypeId">
+                        <option value="1">Meat</option>
+                        <option value="2">Seafood</option>
+                        <option value="3">Vegetable</option>
+                        <option value="4">Spices</option>
+                        <option value="5">Liquid</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ingredientDescription">Description</label>
+                    <input type="text" id="ingredientDescription" class="form-control" placeholder="Description" value="@Model.Description" />
+                </div>
+                <div class="form-group">
+                    <label for="ingredientUnit">Unit</label>
+                    <select type="text" id="ingredientUnit" class="form-control">
+                        <option value="1" @(Model.UnitId.Trim(' ') == "1" ? " selected" : "")>grams</option>
+                        <option value="2" @(Model.UnitId.Trim(' ') == "2" ? " selected" : "")>mil</option>
+                        <option value="3" @(Model.UnitId.Trim(' ') == "3" ? " selected" : "")>tsp</option>
+                        <option value="4" @(Model.UnitId.Trim(' ') == "4" ? " selected" : "")>kilograms</option>
+                        <option value="5" @(Model.UnitId.Trim(' ') == "5" ? " selected" : "")>piece</option>
+                        <option value="6" @(Model.UnitId.Trim(' ') == "6" ? " selected" : "")>box</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredientPricePerUnit">Price Per Unit($)</label>
+                    <input type="number" id="ingredientPricePerUnit" class="form-control" placeholder="Price Per Unit" value="@Model.PricePerUnit" />
+                </div>
+                <button type="submit">Save</button> <button type="button">delete</button>
+            </form>
+            <div class="col-md-8 content-top-2">
+                <!---start-chart---->
+                <!----->
+                <div ifass="content-graph">
+                    @*<div class="content-color">
+                            <div class="content-ch">
+                                <p><i></i>Chrome </p><span>100%</span>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="content-ch1">
+                                <p><i></i>Safari</p><span> 50%</span>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>*@
+                    <!--graph-->
+                    <link rel="stylesheet" href="~/Content/css/graph.css">
+                    <!--//graph-->
+                    <script src="/Content/js/jquery.flot.js"></script>
+                    <div class="graph-container">
+                        <div id="graph-lines"> </div>
+                        <div id="graph-bars"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!---->
+        <!---->
+        <div class="copy">
+            <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+
+
+
+
+
+

@@ -28,30 +28,56 @@
                             <th>type</th>
                             <th>Description</th>
                             <th>Price/Unit</th>
-                            <th>UnitId</th>
+                            <th>Unit</th>
                             <th>Status</th>
                             <th>edit</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.listIngredient)
-                            {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Name</td>
-                            <td>@item.IngredientType</td>
-                            <td>@item.Description</td>
-                            <td>@item.PricePerUnit</td>
-                            <td>@item.UnitId</td>
-                            <td>@item.IsDelete</td>
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.IngredientType.Name</td>
+                                <td>@item.Description</td>
+                                <td>@item.PricePerUnit</td>
+                                <td>
+                                    @switch (item.UnitId.Trim(' '))
+                                    {
+                                        case "1": <text>grams</text>
+                                            break;
+                                        case "2": <text>mil</text>
+                                            break;
+                                        case "3": <text>tsp</text>
+                                            break;
+                                        case "4": <text>kilograms</text>
+                                            break;
+                                        case "5": <text>piece</text>
+                                            break;
+                                        case "6": <text>box</text>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsDelete == true)
+                                    {
+                                        <text>Deleted</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Enable</text>
+                                    }
+                                </td>
 
-                            <th>
-                                <a class="le-button big" href="#">Edit</a>
-                            </th>
-                        </tr>
-                            }
+                                <td>
+                                    <a class="le-button big" href="~/Admin/clickEditIngredient?id=@item.Id" onclick="">Edit</a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
+                <script src="~/Content/js/ingredient.js"></script>
             </div>
             <div class="col-md-8 content-top-2">
                 <!---start-chart---->
