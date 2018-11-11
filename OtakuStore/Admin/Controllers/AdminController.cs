@@ -81,6 +81,17 @@ namespace OtakuStore.Admin.Controllers
             return RedirectToAction("AdminIndex", "Admin");
         }
 
+        //=============New Dish action=============//
+        public ActionResult AddIndex()
+        {
+            var db = new IFood();
+            AddDishViewModel model = new AddDishViewModel();
+            model.listCategory = db.Categories.ToList<Category>();
+            model.listIngredient = db.Ingredients.ToList<Ingredient>();
+
+            return View(model);
+        }
+
         //=============Orders Index action=============//
 
         public ActionResult OrdersIndex()

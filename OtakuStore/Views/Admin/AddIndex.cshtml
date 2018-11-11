@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "AddIndex";
+    Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
+}
+
+@model OtakuStore.ViewModels.AddDishViewModel
+
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="content-main">
+
+        <!--banner-->
+        <div class="banner">
+            <h2>
+                <a href="/Admin/AdminIndex">Dish</a>
+                <i class="fa fa-angle-right"></i>
+                <a href="#"><span>Add</span></a>
+            </h2>
+        </div>
+        <!--//banner-->
+        <!--grid-->
+        <div class="grid-form">
+            <!---->
+            <div class="grid-form1">
+                <div style="margin-left: 200px;"><h3>Add New Dish</h3></div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="horizontal-form">
+                        <form class="form-horizontal" action="" method="post">
+                            <!--Title-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" class="form-control1" name="dish_title" value="" id="focusedinput" required placeholder="Input dish's title">
+                                </div>
+                            </div>
+                            <!--Dish Image-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Dish Image</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="dish_image" value="">
+                                    <p class="help-block">Choose one image for Dish banner</p>
+                                </div>
+                            </div>
+                            <!--Dish Ingredent-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Dish Ingredient</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <select>
+                                        @foreach (var ingredient in Model.listIngredient)
+                                        {
+                                            <option value="@ingredient.Id">@ingredient.Name</option>
+                                        }
+                                    </select>
+                                    <input type="text" name="dish_ingredient_amount" value="" placeholder="Amount">
+                                    <a href="#" onclick="">More</a>
+                                </div>
+                            </div>
+                            <!--Dish Step by step-->
+                            <div id="test">
+                                <div class="form-group">
+                                    <label for="exampleInputFile" class="col-sm-2 control-label">Step by step</label>
+                                    <div class="col-sm-8 col-md-8">
+                                        <input type="text" name="dish_step" value="" placeholder="Step 1">
+                                        <button type="button" onclick="myFunction()">More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Dish Category-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Dish Category</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <select>
+                                        @foreach (var category in Model.listCategory)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Description-->
+                            <div class="form-group">
+                                <label for="txtarea1" class="col-sm-2 control-label">Dish Description</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <textarea name="dish_description" id="dish_description" cols="100" rows="6" class="form-control1"></textarea>
+                                    <script>CKEDITOR.replace('dish_description');</script>
+                                </div>
+                            </div>
+                            <!--Publisher-->
+                            <div class="form-group">
+                                <label for="focusedinput" class="col-sm-2 control-label">Publisher</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="text" min="0" value="Admin" readonly class="form-control1" name="publisher" id="focusedinput" required placeholder="Input name publisher">
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <button class="btn-primary btn" type="submit">Submit</button>
+                                        <button class="btn-inverse btn" type="reset">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--//grid-->
+                <!---->
+                <div class="copy">
+                    <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+
+<script>
+    var counter = 2;
+
+    function newDiv() {
+        var container = document.getElementById("test");
+        container.appendChild('<label for="exampleInputFile" class="col-sm-2 control-label">Step by step</label>');
+
+        //var div = document.createElement("div");
+        //div.className = "form-group";
+        //var div2 = document.createElement("div");
+        //div2.className = "col-sm-8 col-md-8";
+        //div2.appendChild('<input type="text" name="dish_step" value="" placeholder="Step ' + counter++ + '">');
+        //div.appendChild('<label for="exampleInputFile" class="col-sm-2 control-label">Step by step</label>');
+        //div.appendChild(div2);
+        //container.appendChild(div);
+    }
+
+    function myFunction() {
+        var itm = document.getElementById("test").lastChild;
+        var cln = itm.cloneNode(true);
+        document.getElementById("test").appendChild(cln);
+    }
+</script>
