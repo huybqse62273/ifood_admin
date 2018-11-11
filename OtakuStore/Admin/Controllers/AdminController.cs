@@ -114,6 +114,7 @@ namespace OtakuStore.Admin.Controllers
             model.listTransasction = db.Transactions.Select(d => d).ToList<Transaction>();
             return View("ListOrder", model);
         }
+
         public ActionResult chageOderStatus(String id, int status)
         {
             status = (status + 1) % 3; // chỗ này click vào status sẽ đổi từ pending -> success -> cancel -> pending
@@ -121,7 +122,7 @@ namespace OtakuStore.Admin.Controllers
             db.Transactions.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Transaction>().Status = status;
             db.SaveChanges();
 
-            return RedirectToAction("clickListOrder", "Admin");
+            return RedirectToAction("OrdersIndex");
         }
 
         //ingredient  -----------<><><>

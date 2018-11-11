@@ -24,10 +24,11 @@
                         <tr>
                             <th>Transaction code</th>
                             <th>Buyer</th>
+                            <th>Address</th>
                             <th>Create Date</th>
                             <th>Total price</th>
-                            <th></th>
-                            <th></th>
+                            <th>Shopping List</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,17 +37,30 @@
                             <tr>
                                 <th>@item.Id</th>
                                 <th>@item.User.Name</th>
+                                <td>@item.Address-@item.District-@item.City</td>
                                 <th>@item.CreatedOn</th>
                                 <th>@item.TotalPrice</th>
                                 <th>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@Model.listTransasction.IndexOf(item)">
-                                        View Shopping List
+                                        View
                                     </button>
                                 </th>
                             <th>
-                                <a class="le-button big" href="#">Cancel</a>
-                            </th>
+                                <a class="le-button big" href="/Admin/chageOderStatus?id=@item.Id&status=@item.Status">
+                                    @switch (item.Status)
+                                    {
+                                        case 0:
+                                            <button type="button" class="mybtn btn-primary">pending</button>
+                                            break;
+                                        case 1:
+                                            <button type="button" class="mybtn btn-success">successful</button>
+                                            break;
+                                        case 2:
+                                            <button type="button" class="mybtn btn-danger">cancel</button>
+                                            break;
+                                    }
+</th>
                         </tr>
                         }
                     </tbody>
@@ -105,23 +119,40 @@
                     <table class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Cooking recipe</th>
                                 <th>Ingredient</th>
                                 <th>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @if (item.ShoppingLists.Any())
+                        {
+                            foreach (var ing in item.ShoppingLists)
+                            {
+                                <tr>
+                                    <th>@ing.Dish.Name</th>
+                                    <th>@ing.Ingredient.Name</th>
+                                    <th>
+                                        @if (ing.Amount == null)
+                                        {
+                                            <p>1</p>
+                                        }
+                                        else
+                                        {
+                                            @ing.Amount
+                                        }
+                                    </th>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
                             <tr>
-                                @if (item.ShoppingLists.Any())
-                                {
-                                    <th>@item.ShoppingLists.FirstOrDefault().Ingredient.Name</th>
-                                    <th>1</th>
-                                }
-                                else
-                                {
-                                    <th>Banh mi`</th>
-                                    <th>1</th>
-                                }
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
