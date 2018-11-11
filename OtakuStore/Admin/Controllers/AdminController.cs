@@ -101,23 +101,6 @@ namespace OtakuStore.Admin.Controllers
             model.listTransasction = db.Transactions.Select(t => t).ToList<Transaction>();
             return View(model);
         }
-
-        //=============Login action=============//
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult CheckLogin(string username, string pass)
-        {
-            if(username.Equals("admin") && pass.Equals("admin"))
-            {
-                return RedirectToAction("AdminIndex", "Admin", new {username = username });
-            }
-            ViewBag.ErrorMess = "Invalid username or password";
-            return View("Login");
-        }
-
         public ActionResult clickListOrder()
         {
             var db = new IFood();
@@ -136,6 +119,24 @@ namespace OtakuStore.Admin.Controllers
             return RedirectToAction("OrdersIndex");
         }
 
+        //=============Login action=============//
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult CheckLogin(string username, string pass)
+        {
+            if(username.Equals("admin") && pass.Equals("admin"))
+            {
+                return RedirectToAction("AdminIndex", "Admin", new {username = username });
+            }
+            ViewBag.ErrorMess = "Invalid username or password";
+            return View("Login");
+        }
+
+      
+
         //ingredient  -----------<><><>
         public ActionResult clickListIngredient()
         {
@@ -143,6 +144,20 @@ namespace OtakuStore.Admin.Controllers
             IngredientViewModel model = new IngredientViewModel();/// can dung order model
             model.listIngredient = db.Ingredients.Select(d => d).ToList<Ingredient>();
             return View("ListIngredient",model);
+        }
+
+        public ActionResult clickEditIngredient(String id)
+        {
+            var db = new IFood();
+            Ingredient model = new Ingredient();
+            model = db.Ingredients.First(d => d.Id == new Guid(id));
+            return View(model);
+        }
+
+        public ActionResult saveIngredient()
+        {
+            //todo
+            return RedirectToAction("clickListIngredient");
         }
     }
 }
