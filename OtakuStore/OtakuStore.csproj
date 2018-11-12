@@ -229,6 +229,7 @@
     <Compile Include="ViewModels\AddDishViewModel.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />
+    <Compile Include="ViewModels\EditDishViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MessageSendingViewModel.cs" />
     <Compile Include="ViewModels\MoreCommentViewModel.cs" />
@@ -839,6 +840,7 @@
     <Content Include="Views\Admin\ListIngredient.cshtml" />
     <Content Include="Views\Admin\AddIndex.cshtml" />
     <Content Include="Views\Admin\clickEditIngredient.cshtml" />
+    <Content Include="Views\Admin\EditDish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\Models\" />

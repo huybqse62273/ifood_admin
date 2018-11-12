@@ -93,6 +93,27 @@ namespace OtakuStore.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult EditDish(string id)
+        {
+            var db = new IFood();
+            EditDishViewModel model = new EditDishViewModel();
+            try
+            {
+                model.dish = db.Dishes.Where(d => d.Id.Equals(id)).FirstOrDefault<Dish>();
+            }
+            catch(Exception e)
+            {
+
+            }
+
+           
+            model.listCategory = db.Categories.ToList<Category>();
+            model.listIngredient = db.Ingredients.ToList<Ingredient>();
+            model.listUnit = db.Units.ToList<Unit>();
+
+            return View(model);
+        }
+
         public ActionResult AddDishAction(string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
             , int[] dish_ingredient_unit, string[] dish_step, string dish_category, string dish_description)
         {
