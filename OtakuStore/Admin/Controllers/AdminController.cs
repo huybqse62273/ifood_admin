@@ -231,6 +231,14 @@ namespace OtakuStore.Admin.Controllers
             return RedirectToAction("clickListIngredient");
         }
 
+        public ActionResult clickAddIngredient()
+        {
+            //var db = new IFood();
+            //List<Unit> model = new List<Unit>();
+            //model = db.Units.ToList<Unit>();
+            return View();
+        }
+
         public ActionResult AddIngredient( string txtName, string txtType, string txtDesc, string txtUnit,
             string txtPrice)
         {
