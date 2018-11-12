@@ -7,11 +7,15 @@
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="~/Content/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Datatable-->
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
     <!-- Custom Theme files -->
     <link href="~/Content/css/style_admin.css" rel='stylesheet' type='text/css' />
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Mainly scripts -->
     <script src="~/Content/js/jquery.metisMenu.js"></script>
     <script src="~/Content/js/jquery.slimscroll.min.js"></script>
@@ -76,14 +80,13 @@
                 }
             });
 
+            $('.table-striped').DataTable();
 
         });
-
     </script>
     <!--skycons-icons-->
     <script src="~/Content/js/skycons.js"></script>
     <!--//skycons-icons-->
-
     <!--Tags Input-->
     <link rel="stylesheet" href="~/Content/css/jquery.tagsinput.min.css">
     <script type="text/javascript" src="~/Content/js/jquery.tagsinput.min.js"></script>
