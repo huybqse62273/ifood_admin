@@ -201,9 +201,47 @@ namespace OtakuStore.Admin.Controllers
             return View(model);
         }
 
-        public ActionResult saveIngredient()
+        public ActionResult SaveIngredient(string txtId, string txtName, string txtType, string txtDesc, string txtUnit,
+            string txtPrice )
         {
-            //todo
+            try
+            {
+                var db = new IFood();
+                Ingredient model = new Ingredient();
+                model = db.Ingredients.First(d => d.Id == new Guid(txtId));
+                model.Name = txtName.Trim(' ');
+                int tmp = 0; int.TryParse(txtType, out tmp); model.TypeId = tmp;
+                model.Description = txtDesc.Trim(' ');
+                model.UnitId = txtUnit.Trim(' ');
+                double tmp2 = 0.0; double.TryParse(txtPrice, out tmp2); model.PricePerUnit = tmp2;
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return RedirectToAction("clickListIngredient");
+        }
+
+        public ActionResult AddIngredient( string txtName, string txtType, string txtDesc, string txtUnit,
+            string txtPrice)
+        {
+            try
+            {
+                var db = new IFood();
+                Ingredient model = new Ingredient();
+                model.Id = new Guid();
+                model.Name = txtName.Trim(' ');
+                int tmp = 0; int.TryParse(txtType, out tmp); model.TypeId = tmp;
+                model.Description = txtDesc.Trim(' ');
+                model.UnitId = txtUnit.Trim(' ');
+                double tmp2 = 0.0; double.TryParse(txtPrice, out tmp2); model.PricePerUnit = tmp2;
+                db.Ingredients.Add(model);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return RedirectToAction("clickListIngredient");
         }
     }
