@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "AddIndex";
+    ViewBag.Title = "EditDish";
     Layout = "~/Admin/Views/Share/_LayoutAmin.cshtml";
 }
+@model OtakuStore.ViewModels.EditDishViewModel
 
-@model OtakuStore.ViewModels.AddDishViewModel
 
 <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="content-main">
@@ -26,19 +26,20 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="horizontal-form">
-                        <form class="form-horizontal" action="/Admin/AddDishAction/" method="post">
+                        <form class="form-horizontal" action="/Admin/EditDishAction/" method="post">
                             <!--Title-->
+                            <input type="hidden" name="dish_id" value="@Model.dish.Id"/>
                             <div class="form-group">
                                 <label for="focusedinput" class="col-sm-2 control-label">Title</label>
                                 <div class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control " name="dish_title" value="" id="focusedinput" required placeholder="Input dish's title">
+                                    <input type="text" class="form-control " name="dish_title" value="@Model.dish.Name" id="focusedinput" required placeholder="Input dish's title">
                                 </div>
                             </div>
                             <!--Dish Image-->
                             <div class="form-group">
                                 <label for="exampleInputFile" class="col-sm-2 control-label">Dish Image Url</label>
                                 <div class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control" name="dish_image" required placeholder="www.google.com/image.png" value="" style="width:50%;">@*accept="image/png, image/jpeg, image/gif"*@
+                                    <input type="text" class="form-control" name="dish_image" required placeholder="www.google.com/image.png" value="@Model.dish.ImageLink" style="width:50%;">@*accept="image/png, image/jpeg, image/gif"*@
                                     <p class="help-block">add one image for Dish banner</p>
                                 </div>
                             </div>
@@ -46,21 +47,58 @@
                             <div class="form-group" id="con">
                                 <label for="exampleInputFile" class="col-sm-2 control-label">Dish Ingredient</label>
                                 <div class="col-sm-6 col-md-6" id="ingre">
-                                    <select name="dish_ingredient">
-                                        @foreach (var ingredient in Model.listIngredient)
+                                    @if (Model.dish.Dish_Ingredient.Any())
+                                    {
+                                        foreach (var item in Model.dish.Dish_Ingredient)
                                         {
-                                            <option value="@ingredient.Id">@ingredient.Name</option>
+                                            <select name="dish_ingredient">
+                                                @foreach (var ingredient in Model.listIngredient)
+                                                {
+                                                    if (ingredient.Id.Equals(item.IngredientId))
+                                                    {
+                                                        <option value="@ingredient.Id" selected>@ingredient.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@ingredient.Id">@ingredient.Name</option>
+                                                    }
+
+                                                }
+                                            </select>
+                                            <input type="text" name="dish_ingredient_amount" required value="@item.Amount" placeholder="Amount">
+                                            <select name="dish_ingredient_unit">
+                                                @foreach (var unit in Model.listUnit)
+                                                {
+                                                    if (unit.Id.Equals(item.UnitId))
+                                                    {
+                                                        <option value="@unit.Id" selected>@unit.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@unit.Id">@unit.Name</option>
+                                                    }    
+                                                }
+                                            </select>
                                         }
-                                    </select>
-                                    <input type="text" name="dish_ingredient_amount" required value="" placeholder="Amount">
-                                    <select name="dish_ingredient_unit">
-                                        @foreach (var unit in Model.listUnit)
-                                        {
-                                            <option value="@unit.Id">@unit.Name</option>
-                                        }
-                                    </select>
+                                    }
+                                    else
+                                    {
+                                        <select name="dish_ingredient">
+                                            @foreach (var ingredient in Model.listIngredient)
+                                            {
+                                                <option value="@ingredient.Id">@ingredient.Name</option>
+                                            }
+                                        </select>
+                                        <input type="text" name="dish_ingredient_amount" required value="" placeholder="Amount">
+                                        <select name="dish_ingredient_unit">
+                                            @foreach (var unit in Model.listUnit)
+                                            {
+                                                <option value="@unit.Id">@unit.Name</option>
+                                            }
+                                        </select>
+                                    }
                                 </div>
-                                <button id="btnAddIngredient"  type="button" onclick="newIngredient()">More</button>
+                                <button id="btnAddIngredient" type="button" onclick="newIngredient()">More</button>
                             </div>
                             <script>
                                 function newIngredient() {
@@ -78,8 +116,19 @@
                                 <div class="form-group">
                                     <label for="exampleInputFile" class="col-sm-2 control-label">Step by step</label>
                                     <div class="col-sm-8 col-md-8">
-                                        <input type="text" name="dish_step" value="" placeholder="Step 1" id="stepTex">
-                                        <button id="btnAddStep" type="button" onclick="newStep()">More</button>
+                                        @if (Model.dish.StepBySteps.Any())
+                                        {
+                                            for(var i = 0; i < Model.dish.StepBySteps.Count(); i++)
+                                            {
+                                                <input type="text" name="dish_step" value="@Model.dish.StepBySteps.ElementAt(i).Description" placeholder="Step @i" id="stepTex">
+                                            }
+                                            <button id="btnAddStep" type="button" onclick="newStep()">More</button>
+                                        }
+                                        else
+                                        {
+                                            <input type="text" name="dish_step" value="" placeholder="Step 1" id="stepTex">
+                                            <button id="btnAddStep" type="button" onclick="newStep()">More</button>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +147,14 @@
                                     <select name="dish_category">
                                         @foreach (var category in Model.listCategory)
                                         {
-                                            <option value="@category.Id">@category.Name</option>
+                                            if (Model.dish.Category_Dish.First().CategoryId.Equals(category.Id))
+                                            {
+                                                <option value="@category.Id" selected>@category.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@category.Id">@category.Name</option>
+                                            }
                                         }
                                     </select>
                                 </div>
