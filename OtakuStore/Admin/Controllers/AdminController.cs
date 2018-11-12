@@ -96,13 +96,21 @@ namespace OtakuStore.Admin.Controllers
         public ActionResult AddDishAction(string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
             , int[] dish_ingredient_unit, string[] dish_step, string dish_category, string dish_description)
         {
+            var db = new IFood();
+            Dish dish = new Dish();
             try
             {
-                var db = new IFood();
-                Dish dish = new Dish();
                 dish.Id = Guid.NewGuid();
                 dish.Name = dish_title;
                 dish.ImageLink = dish_image;
+                dish.AuthorId = db.Users.FirstOrDefault().Id;
+                dish.IsActive = true;
+                dish.IsDelete = false;
+                dish.Rate = 0;
+
+                dish.CreateOn = DateTime.Now;
+                dish.Description = dish_description;
+
                 for (int i = 0; i < dish_ingredient.Length; i++)
                 {
                     Dish_Ingredient dish_Ingredient = new Dish_Ingredient();
@@ -113,8 +121,7 @@ namespace OtakuStore.Admin.Controllers
                     dish_Ingredient.Description = "";
                     dish.Dish_Ingredient.Add(dish_Ingredient);
                 }
-                dish.CreateOn = DateTime.Now;
-                dish.Description = "";
+
                 for (int i = 0; i < dish_step.Length; i++)
                 {
                     StepByStep step = new StepByStep();
@@ -123,6 +130,8 @@ namespace OtakuStore.Admin.Controllers
                     step.Description = dish_step[i];
                     dish.StepBySteps.Add(step);
                 }
+
+
                 Category_Dish category = new Category_Dish();
                 category.CategoryId = Guid.Parse(dish_category);
                 category.DishId = dish.Id;
