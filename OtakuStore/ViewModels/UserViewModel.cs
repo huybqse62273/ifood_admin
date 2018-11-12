@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using PagedList;
-using Data;
+using Data.Model;
 
 namespace OtakuStore.ViewModels
 {
     public class UserViewModel
     {
-        public IPagedList<Account> accounts { get; set; } 
+        public List<User> userList { get; set; } 
     }
 }
