@@ -97,21 +97,45 @@ namespace OtakuStore.Admin.Controllers
         {
             var db = new IFood();
             EditDishViewModel model = new EditDishViewModel();
-            try
-            {
-                model.dish = db.Dishes.Where(d => d.Id.Equals(id)).FirstOrDefault<Dish>();
-            }
-            catch(Exception e)
-            {
-
-            }
-
-           
+            model.dish = db.Dishes.Where(d => d.Id.ToString().Equals(id)).FirstOrDefault<Dish>();
             model.listCategory = db.Categories.ToList<Category>();
             model.listIngredient = db.Ingredients.ToList<Ingredient>();
             model.listUnit = db.Units.ToList<Unit>();
 
             return View(model);
+        }
+
+        public ActionResult EditDishAction(string dish_id, string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
+            , int[] dish_ingredient_unit, string[] dish_step, string dish_category, string dish_description)
+        {
+            var db = new IFood();
+            Dish dish = db.Dishes.Where(d => d.Id.ToString().Equals(dish_id)).FirstOrDefault<Dish>();
+            try
+            {
+                dish.Name = dish_title;
+                dish.ImageLink = dish_image;
+                dish.Description = dish_description;
+
+                for (int i = 0; i < dish_ingredient.Length; i++)
+                {
+                    dish.Dish_Ingredient.ElementAt(i).IngredientId = Guid.Parse(dish_ingredient[i]);
+                    dish.Dish_Ingredient.ElementAt(i).Amount = dish_ingredient_amount[i];
+                    dish.Dish_Ingredient.ElementAt(i).UnitId = dish_ingredient_unit[i];
+                }
+
+                for (int i = 0; i < dish_step.Length; i++)
+                {
+                    dish.StepBySteps.ElementAt(i).Description = dish_step[i];
+                }
+
+                dish.Category_Dish.First().CategoryId = Guid.Parse(dish_category);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("AdminIndex");
         }
 
         public ActionResult AddDishAction(string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
