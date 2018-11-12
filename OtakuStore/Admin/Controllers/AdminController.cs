@@ -118,14 +118,38 @@ namespace OtakuStore.Admin.Controllers
 
                 for (int i = 0; i < dish_ingredient.Length; i++)
                 {
-                    dish.Dish_Ingredient.ElementAt(i).IngredientId = Guid.Parse(dish_ingredient[i]);
-                    dish.Dish_Ingredient.ElementAt(i).Amount = dish_ingredient_amount[i];
-                    dish.Dish_Ingredient.ElementAt(i).UnitId = dish_ingredient_unit[i];
+                    if(i >= dish.Dish_Ingredient.Count())
+                    {
+                        Dish_Ingredient dish_Ingredient = new Dish_Ingredient();
+                        dish_Ingredient.IngredientId = Guid.Parse(dish_ingredient[i]);
+                        dish_Ingredient.Amount = dish_ingredient_amount[i];
+                        dish_Ingredient.UnitId = dish_ingredient_unit[i];
+                        dish_Ingredient.DishId = dish.Id;
+                        dish_Ingredient.Description = "";
+                        dish.Dish_Ingredient.Add(dish_Ingredient);
+                    }
+                    else
+                    {
+                        dish.Dish_Ingredient.ElementAt(i).IngredientId = Guid.Parse(dish_ingredient[i]);
+                        dish.Dish_Ingredient.ElementAt(i).Amount = dish_ingredient_amount[i];
+                        dish.Dish_Ingredient.ElementAt(i).UnitId = dish_ingredient_unit[i];
+                    }
                 }
 
                 for (int i = 0; i < dish_step.Length; i++)
                 {
-                    dish.StepBySteps.ElementAt(i).Description = dish_step[i];
+                    if (i >= dish.StepBySteps.Count())
+                    {
+                        StepByStep step = new StepByStep();
+                        step.DishId = dish.Id;
+                        step.Title = "Step" + (i + 1);
+                        step.Description = dish_step[i];
+                        dish.StepBySteps.Add(step);
+                    }
+                    else
+                    {
+                        dish.StepBySteps.ElementAt(i).Description = dish_step[i];
+                    }
                 }
 
                 dish.Category_Dish.First().CategoryId = Guid.Parse(dish_category);
