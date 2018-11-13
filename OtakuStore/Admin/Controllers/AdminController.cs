@@ -315,7 +315,7 @@ namespace OtakuStore.Admin.Controllers
             {
                 var db = new IFood();
                 Ingredient model = new Ingredient();
-                model.Id = new Guid();
+                model.Id = Guid.NewGuid();
                 model.Name = txtName.Trim(' ');
                 int tmp = 0; int.TryParse(txtType, out tmp); model.TypeId = tmp;
                 model.Description = txtDesc.Trim(' ');
