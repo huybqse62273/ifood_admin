@@ -53,12 +53,6 @@
                                         }
                                     </select>
                                     <input type="text" name="dish_ingredient_amount" required value="" placeholder="Amount">
-                                    <select name="dish_ingredient_unit">
-                                        @foreach (var unit in Model.listUnit)
-                                        {
-                                            <option value="@unit.Id">@unit.Name</option>
-                                        }
-                                    </select>
                                 </div>
                                 <button id="btnAddIngredient"  type="button" onclick="newIngredient()">More</button>
                             </div>
@@ -68,7 +62,7 @@
                                     var label = document.createElement("label");
                                     label.className = "col-sm-2";
                                     var cln = div.cloneNode(true);
-                                    $("#con").append("<div class='clearfix'> </div><br>");
+                                    $("#con").append("<div class='clearfix'> </div>");
                                     $("#con").append(label);
                                     $("#con").append(cln);
                                 }
@@ -89,6 +83,39 @@
                                     var cln = $('<input type="text" name="dish_step" value="" placeholder="Step ' + ++countStep +'" id="stepTex">');
                                     console.log(cln);
                                     $("#btnAddStep").before(cln);
+                                }
+                            </script>
+                            <!--Dish Time cooking-->
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Time cooking</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <input type="number" name="dish_timecooking" value="" class="col-sm-2" >
+                                    <label for="exampleInputFile" class="col-sm-2">Min</label>
+                                </div>
+                            </div>
+                            <!--Dish Tags-->
+                            <div >
+                                <div class="form-group">
+                                    <label for="exampleInputFile" class="col-sm-2 control-label">Tags</label>
+                                    <div class="col-sm-8 col-md-8">
+                                        <select name="dish_tag" id="tag">
+                                            @foreach (var tag in Model.listCourse)
+                                            {
+                                                <option value="@tag.Id">@tag.Name</option>
+                                            }
+                                        </select>
+                                        <button id="btnAddTag" type="button" onclick="newTag()">More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                var countStep = 1;
+                                function newTag() {
+                                    var div = document.getElementById("tag");
+                                    var cln = div.cloneNode(true);
+                                    console.log(cln);
+                                    $("#btnAddTag").before("<div class='clearfix'> </div>");
+                                    $("#btnAddTag").before(cln);
                                 }
                             </script>
                             <!--Dish Category-->

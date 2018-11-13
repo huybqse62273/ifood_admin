@@ -11,5 +11,6 @@ namespace OtakuStore.ViewModels
         public List<Category> listCategory { get; set; }
         public List<Ingredient> listIngredient { get; set; }
         public List<Unit> listUnit { get; set; }
+        public List<Course> listCourse { get; set; }
     }
 }

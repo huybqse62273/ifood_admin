@@ -89,6 +89,14 @@ namespace OtakuStore.Admin.Controllers
             model.listCategory = db.Categories.ToList<Category>();
             model.listIngredient = db.Ingredients.ToList<Ingredient>();
             model.listUnit = db.Units.ToList<Unit>();
+            try {
+                model.listCourse = db.Courses.ToList<Course>();
+            }
+            catch(Exception e)
+            {
+
+            }
+            
 
             return View(model);
         }
@@ -101,12 +109,13 @@ namespace OtakuStore.Admin.Controllers
             model.listCategory = db.Categories.ToList<Category>();
             model.listIngredient = db.Ingredients.ToList<Ingredient>();
             model.listUnit = db.Units.ToList<Unit>();
+            model.listCourse = db.Courses.ToList<Course>();
 
             return View(model);
         }
 
         public ActionResult EditDishAction(string dish_id, string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
-            , int[] dish_ingredient_unit, string[] dish_step, string dish_category, string dish_description)
+            , string[] dish_step, string[] dish_tag, int dish_timecooking, string dish_category, string dish_description)
         {
             var db = new IFood();
             Dish dish = db.Dishes.Where(d => d.Id.ToString().Equals(dish_id)).FirstOrDefault<Dish>();
@@ -115,15 +124,17 @@ namespace OtakuStore.Admin.Controllers
                 dish.Name = dish_title;
                 dish.ImageLink = dish_image;
                 dish.Description = dish_description;
+                dish.TimeCooking = dish_timecooking + " minutes";
 
                 for (int i = 0; i < dish_ingredient.Length; i++)
                 {
-                    if(i >= dish.Dish_Ingredient.Count())
+                    var ingredient = dish_ingredient[i].ToString();
+                    if (i >= dish.Dish_Ingredient.Count())
                     {
                         Dish_Ingredient dish_Ingredient = new Dish_Ingredient();
                         dish_Ingredient.IngredientId = Guid.Parse(dish_ingredient[i]);
                         dish_Ingredient.Amount = dish_ingredient_amount[i];
-                        dish_Ingredient.UnitId = dish_ingredient_unit[i];
+                        dish_Ingredient.UnitId = int.Parse(db.Ingredients.Where(ing => ing.Id.ToString().Equals(ingredient)).First().UnitId.Trim());
                         dish_Ingredient.DishId = dish.Id;
                         dish_Ingredient.Description = "";
                         dish.Dish_Ingredient.Add(dish_Ingredient);
@@ -132,7 +143,7 @@ namespace OtakuStore.Admin.Controllers
                     {
                         dish.Dish_Ingredient.ElementAt(i).IngredientId = Guid.Parse(dish_ingredient[i]);
                         dish.Dish_Ingredient.ElementAt(i).Amount = dish_ingredient_amount[i];
-                        dish.Dish_Ingredient.ElementAt(i).UnitId = dish_ingredient_unit[i];
+                        dish.Dish_Ingredient.ElementAt(i).UnitId = int.Parse(db.Ingredients.Where(ing => ing.Id.ToString().Equals(ingredient)).First().UnitId.Trim());
                     }
                 }
 
@@ -152,18 +163,33 @@ namespace OtakuStore.Admin.Controllers
                     }
                 }
 
+                for (int i = 0; i < dish_tag.Length; i++)
+                {
+                    if( i>= dish.Course_Dish.Count())
+                    {
+                        Course_Dish course = new Course_Dish();
+                        course.CourseId = Guid.Parse(dish_tag[i]);
+                        course.DishId = dish.Id;
+                        dish.Course_Dish.Add(course);
+                    }
+                    else
+                    {
+                        dish.Course_Dish.ElementAt(i).CourseId = Guid.Parse(dish_tag[i]);
+                    }             
+                }
+
                 dish.Category_Dish.First().CategoryId = Guid.Parse(dish_category);
                 db.SaveChanges();
             }
             catch (Exception e)
             {
-
+               
             }
             return RedirectToAction("AdminIndex");
         }
 
         public ActionResult AddDishAction(string dish_title, string dish_image, string[] dish_ingredient, int[] dish_ingredient_amount
-            , int[] dish_ingredient_unit, string[] dish_step, string dish_category, string dish_description)
+            , string[] dish_step, string[] dish_tag, int dish_timecooking , string dish_category, string dish_description)
         {
             var db = new IFood();
             Dish dish = new Dish();
@@ -176,6 +202,8 @@ namespace OtakuStore.Admin.Controllers
                 dish.IsActive = true;
                 dish.IsDelete = false;
                 dish.Rate = 0;
+                dish.TimeCooking = dish_timecooking + " minutes";
+       
 
                 dish.CreateOn = DateTime.Now;
                 dish.Description = dish_description;
@@ -185,7 +213,8 @@ namespace OtakuStore.Admin.Controllers
                     Dish_Ingredient dish_Ingredient = new Dish_Ingredient();
                     dish_Ingredient.IngredientId = Guid.Parse(dish_ingredient[i]);
                     dish_Ingredient.Amount = dish_ingredient_amount[i];
-                    dish_Ingredient.UnitId = dish_ingredient_unit[i];
+                    var ingredient = dish_ingredient[i].ToString();
+                    dish_Ingredient.UnitId = int.Parse(db.Ingredients.Where(ing => ing.Id.ToString().Equals(ingredient)).First().UnitId.Trim());
                     dish_Ingredient.DishId = dish.Id;
                     dish_Ingredient.Description = "";
                     dish.Dish_Ingredient.Add(dish_Ingredient);
@@ -200,11 +229,18 @@ namespace OtakuStore.Admin.Controllers
                     dish.StepBySteps.Add(step);
                 }
 
+                for (int i = 0; i < dish_tag.Length; i++)
+                {
+                    Course_Dish course = new Course_Dish();
+                    course.CourseId = Guid.Parse(dish_tag[i]);
+                    course.DishId = dish.Id;
+                    dish.Course_Dish.Add(course);
+                }
 
                 Category_Dish category = new Category_Dish();
                 category.CategoryId = Guid.Parse(dish_category);
                 category.DishId = dish.Id;
-                category.Description = "";
+                category.Description = dish_description;
                 dish.Category_Dish.Add(category);
 
                 db.Dishes.Add(dish);
