@@ -178,7 +178,7 @@ namespace OtakuStore.Admin.Controllers
                     }             
                 }
 
-                dish.Category_Dish.First().CategoryId = Guid.Parse(dish_category);
+                dish.Category_Dish.First().Description = dish_description;
                 db.SaveChanges();
             }
             catch (Exception e)
