@@ -842,6 +842,7 @@
     <Content Include="Views\Admin\clickEditIngredient.cshtml" />
     <Content Include="Views\Admin\clickAddIngredient.cshtml" />
     <Content Include="Views\Admin\EditDish.cshtml" />
+    <Content Include="Views\Admin\ListUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\Models\" />
